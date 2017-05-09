@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './styles.css';
+import styles from './timeline.css';
 
 const { string, number } = PropTypes;
 
@@ -66,7 +66,7 @@ export default class Timeline extends Component {
     render() {
 
         return (
-            <div ref={ref => (this.timeline = ref)} styleName='timeline'>
+            <div ref={ref => (this.timeline = ref)} className={styles.timeline}>
                 <canvas ref={ref => (this.canvas = ref)} />
                 <video ref={ref => (this.video = ref)} preload="auto" muted={true} autoPlay={false} style={{display: 'none'}}>
                     <source src={this.props.src} />

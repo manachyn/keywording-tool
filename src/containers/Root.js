@@ -18,7 +18,8 @@ const Root = ({ store, history }) => (
                     <li><Link to="/keywording">Keywording</Link></li>
                 </ul>
 
-                <Route exact path="/" component={Upload}/>
+                {/*<Route exact path="/" component={Upload}/>*/}
+                <Route exact path="/" component={Slicing}/>
                 <Route path="/slicing" component={Slicing}/>
                 <Route path="/keywording" component={Keywording}/>
             </div>

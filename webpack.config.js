@@ -45,19 +45,19 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    'css-loader?importLoader=1&modules&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
+                    'postcss-loader',
+                ],
+            },
+            {
                 test: /\.js$/,
                 use: [
                     'babel-loader',
                 ],
                 exclude: /node_modules/
-            },
-            {
-                test: /\.css$/,
-                use: [
-                    'style-loader',
-                    'css-loader?modules',
-                    'postcss-loader',
-                ],
             },
         ],
     },
