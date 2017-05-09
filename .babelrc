@@ -6,6 +6,6 @@
   ],
   "plugins": [
     "react-hot-loader/babel",
-    "react-css-modules"
+    ["react-css-modules", {"context": "src"}]
   ]
 }

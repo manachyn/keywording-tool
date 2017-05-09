@@ -1,0 +1,1 @@
+export const VIDEO_TIME_UPDATE = 'VIDEO_TIME_UPDATE';

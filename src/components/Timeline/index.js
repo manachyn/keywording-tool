@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './styles.css';
 
+import Indicator from './Indicator';
+
 const { string, number } = PropTypes;
 
 const timelineStyle = {
@@ -64,10 +66,14 @@ export default class Timeline extends Component {
     }
 
     render() {
+        console.log(this.props);
+        const { currentTime, currentPercentage } = this.props;
 
         return (
-            <div ref={ref => (this.timeline = ref)} styleName='timeline'>
+            <div ref={ref => (this.timeline = ref)} styleName="timeline">
+                <span>{currentTime}</span>
                 <canvas ref={ref => (this.canvas = ref)} />
+                <Indicator currentTime={currentTime} currentPercentage={currentPercentage} />
                 <video ref={ref => (this.video = ref)} preload="auto" muted={true} autoPlay={false} style={{display: 'none'}}>
                     <source src={this.props.src} />
                 </video>

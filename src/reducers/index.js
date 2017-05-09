@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
-import video from './video';
+import video from '../modules/video/reducers';
 
 const rootReducer = combineReducers({
     video,

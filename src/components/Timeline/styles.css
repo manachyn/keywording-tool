@@ -1,8 +1,8 @@
 .timeline {
     position: relative;
-    background: red;
 }
 
 .timeline canvas {
     display: block;
+    z-index: 100;
 }

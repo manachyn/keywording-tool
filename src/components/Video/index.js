@@ -1,11 +1,27 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import pick from 'lodash/pick';
 
-const { node } = PropTypes;
+const { string, bool, number, node, func } = PropTypes;
+
+const videoOwnProps = {
+    preload: string,
+    autoPlay: bool,
+    controls: bool,
+    loop: bool,
+    muted: bool,
+    src: string,
+    poster: string,
+    width: number,
+    height: number,
+    crossOrigin: string
+};
 
 export default class Video extends Component {
     static propTypes = {
+        ...videoOwnProps,
         children: node,
+        onTimeUpdate: func
     };
 
     static defaultProps = {
@@ -14,28 +30,29 @@ export default class Video extends Component {
         controls: false
     };
 
+    constructor(props) {
+        super(props);
+        this.handleTimeUpdate = this.handleTimeUpdate.bind(this);
+    }
+
     componentDidMount() {
-        this.video.addEventListener('loadedmetadata', this.handleLoadedMetadata);
-        this.video.addEventListener('loadeddata', this.handleLoadedData);
+        this.video.addEventListener('timeupdate', this.handleTimeUpdate);
     }
 
     componentWillUnmount() {
-        this.video.removeEventListener('loadedmetadata', this.handleLoadedMetadata);
-        this.video.removeEventListener('loadeddata', this.handleLoadedData);
+        this.video.removeEventListener('timeupdate', this.handleTimeUpdate);
     }
 
-    handleLoadedMetadata = (e) => {
-
-    };
-
-    handleLoadedData = (e) => {
-
-    };
+    handleTimeUpdate() {
+        if (this.props.onTimeUpdate) this.props.onTimeUpdate(this.video.currentTime, this.video.duration);
+    }
 
     render() {
-        const { children, ...props } = this.props;
+        const { children, ...other } = this.props;
+        const ownProps = pick(other, Object.keys(videoOwnProps));
+
         return (
-            <video ref={ref => (this.video = ref)} {...props}>
+            <video ref={ref => (this.video = ref)} {...ownProps}>
                 {children}
             </video>
         );

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Video from './../../components/Video';
-import Timeline from "./../../components/Timeline";
+import Video from './../../containers/Video';
+import Timeline from "./../../containers/Timeline";
 
 const Slicing = () => (
     <div>
