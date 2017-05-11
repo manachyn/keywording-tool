@@ -2,10 +2,9 @@ import { connect } from 'react-redux'
 import Timeline from '../components/Timeline'
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
-        currentTime: state.rootReducer.video.currentTime,
-        currentPercentage: state.rootReducer.video.currentPercentage,
+        currentTime: state.video.currentTime,
+        currentPercentage: state.video.currentPercentage,
     }
 };
 

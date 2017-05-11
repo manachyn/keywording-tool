@@ -23,13 +23,7 @@ const enhancer = composeEnhancers(
     applyMiddleware(...middleware),
 );
 
-const store = createStore(
-    combineReducers({
-        rootReducer,
-        router: routerReducer
-    }),
-    enhancer
-);
+const store = createStore(rootReducer, enhancer);
 
 ReactDOM.render(
     <Root store={store} history={history} />,

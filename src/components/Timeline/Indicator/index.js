@@ -18,7 +18,7 @@ export default class Indicator extends Component {
     render() {
         const { currentPercentage } = this.props;
         return (
-            <div styleName="indicator" style={{ right: `${100 - currentPercentage}%` }}>&nbsp;</div>
+            <div styleName="indicator" style={{ left: `${currentPercentage}%` }}>&nbsp;</div>
         );
     }
 }

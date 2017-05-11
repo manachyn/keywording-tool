@@ -6,4 +6,6 @@
     width: 2px;
     height: 100%;
     background: red;
+    /*transition: all 0.5s ease-in-out;*/
+    /*transition:left 1s linear;*/
 }

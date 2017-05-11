@@ -66,12 +66,10 @@ export default class Timeline extends Component {
     }
 
     render() {
-        console.log(this.props);
         const { currentTime, currentPercentage } = this.props;
 
         return (
             <div ref={ref => (this.timeline = ref)} styleName="timeline">
-                <span>{currentTime}</span>
                 <canvas ref={ref => (this.canvas = ref)} />
                 <Indicator currentTime={currentTime} currentPercentage={currentPercentage} />
                 <video ref={ref => (this.video = ref)} preload="auto" muted={true} autoPlay={false} style={{display: 'none'}}>
