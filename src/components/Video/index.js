@@ -21,7 +21,8 @@ export default class Video extends Component {
     static propTypes = {
         ...videoOwnProps,
         children: node,
-        onTimeUpdate: func
+        onTimeUpdate: func,
+        onLoadedMetadata: func
     };
 
     static defaultProps = {
@@ -36,15 +37,33 @@ export default class Video extends Component {
     }
 
     componentDidMount() {
+        this.video.addEventListener('loadedmetadata', this.handleLoadedMetadata);
         this.video.addEventListener('timeupdate', this.handleTimeUpdate);
     }
 
     componentWillUnmount() {
+        this.video.removeEventListener('loadedmetadata', this.handleLoadedMetadata);
         this.video.removeEventListener('timeupdate', this.handleTimeUpdate);
     }
 
+    handleLoadedMetadata = () => {
+        if (this.props.onLoadedMetadata) this.props.onLoadedMetadata({
+            duration: this.video.duration,
+            size: this.getSize()
+        });
+    };
+
     handleTimeUpdate() {
         if (this.props.onTimeUpdate) this.props.onTimeUpdate(this.video.currentTime, this.video.duration);
+    }
+
+    getSize() {
+        return {
+            width: this.video.width,
+            height: this.video.height,
+            videoWidth: this.video.videoWidth,
+            videoHeight: this.video.videoHeight
+        };
     }
 
     render() {

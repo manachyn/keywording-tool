@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import './styles.css';
 
 import Indicator from './Indicator';
+import SlicesLayer from './SlicesLayer';
 
-const { string, number } = PropTypes;
+import sliceShape from './SlicesLayer/Slice/shape';
+
+const { string, number, arrayOf, func } = PropTypes;
 
 const timelineStyle = {
     width: '100%'
@@ -13,7 +16,13 @@ const timelineStyle = {
 export default class Timeline extends Component {
     static propTypes = {
         src: string,
-        frameWidth: number
+        frameWidth: number,
+        currentTime: number,
+        currentPercentage: number,
+        duration: number,
+        slices: arrayOf(sliceShape),
+        onResizeSlice: func.isRequired,
+        onRemoveSlice: func.isRequired
     };
 
     static defaultProps = {
@@ -33,7 +42,8 @@ export default class Timeline extends Component {
     handleLoadedMetadata = () => {
         const width = this.timeline.offsetWidth;
         this.frameWidth = this.props.frameWidth;
-        this.frameHeight = this.video.videoHeight * this.frameWidth / this.video.videoWidth;
+        //this.frameHeight = this.video.videoHeight * this.frameWidth / this.video.videoWidth;
+        this.frameHeight = 100;
         this.canvas.width = width;
         this.canvas.height = this.frameHeight;
         this.totalFrames = width / this.props.frameWidth;
@@ -53,6 +63,14 @@ export default class Timeline extends Component {
         }
     };
 
+    handleResizeSlice = (sliceId, offsetDelta, durationDelta, factor) => {
+        this.props.onResizeSlice(sliceId, offsetDelta, durationDelta, factor);
+    };
+
+    handleRemoveSlice = (id) => {
+        this.props.onRemoveSlice(id);
+    };
+
     updateCanvas() {
         // const ctx = this.canvas.getContext('2d');
         //
@@ -66,11 +84,23 @@ export default class Timeline extends Component {
     }
 
     render() {
-        const { currentTime, currentPercentage } = this.props;
+        const {
+            currentTime,
+            currentPercentage,
+            duration,
+            slices,
+            onResizeSlice,
+            onRemoveSlice
+        } = this.props;
 
         return (
             <div ref={ref => (this.timeline = ref)} styleName="timeline">
                 <canvas ref={ref => (this.canvas = ref)} />
+                <SlicesLayer elements={slices}
+                             duration={duration}
+                             onResizeElement={onResizeSlice}
+                             onRemoveElement={onRemoveSlice}
+                />
                 <Indicator currentTime={currentTime} currentPercentage={currentPercentage} />
                 <video ref={ref => (this.video = ref)} preload="auto" muted={true} autoPlay={false} style={{display: 'none'}}>
                     <source src={this.props.src} />

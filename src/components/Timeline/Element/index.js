@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 const { func } = PropTypes;
+import sliceProps from './props';
 
 export class Slice extends Component {
     static propTypes = {
+        ...sliceProps,
         onDelete: func.isRequired
     };
 

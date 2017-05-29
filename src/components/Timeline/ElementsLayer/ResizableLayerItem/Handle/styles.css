@@ -1,0 +1,19 @@
+.handle {
+    position: absolute;
+    width: 4px;
+    min-height: 100%;
+    cursor: col-resize;
+    z-index: 310;
+}
+
+.left {
+    composes: handle;
+    left: 0;
+}
+
+.right {
+    composes: handle;
+    right: 0;
+}
+
+
