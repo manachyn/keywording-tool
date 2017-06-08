@@ -6,6 +6,7 @@ import Indicator from './Indicator';
 import SlicesLayer from './SlicesLayer';
 
 import sliceShape from './SlicesLayer/Slice/shape';
+import videoShape from '../Uploader/Video/shape';
 
 const { string, number, arrayOf, func } = PropTypes;
 
@@ -15,7 +16,7 @@ const timelineStyle = {
 
 export default class Timeline extends Component {
     static propTypes = {
-        src: string,
+        video: videoShape.isRequired,
         frameWidth: number,
         currentTime: number,
         currentPercentage: number,
@@ -133,7 +134,7 @@ export default class Timeline extends Component {
                            onSetInPoint={this.handleSetInPoint}
                            onSetOutPoint={this.handleSetOutPoint} />
                 <video ref={ref => (this.video = ref)} preload="auto" muted={true} autoPlay={false} style={{display: 'none'}}>
-                    <source src={this.props.src} />
+                    <source src={this.props.video.url} />
                 </video>
             </div>
         );

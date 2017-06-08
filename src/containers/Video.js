@@ -1,10 +1,29 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 import { loadedMetadata, timeUpdate } from '../modules/video/actions';
-import Video from '../components/Video';
+import VideoComponent from '../components/Video';
+import videoShape from '../components/Uploader/Video/shape';
+const { func } = PropTypes;
+
+import { getSelectedVideo } from '../modules/uploads/reducers/videos';
+
+const Video = ({ video, ...other }) => (
+    <VideoComponent preload="auto" controls {...other}>
+        <source src={video.url} type="video/mp4" />
+    </VideoComponent>
+);
+
+Video.propTypes = {
+    video: videoShape.isRequired,
+    onTimeUpdate: func,
+    onLoadedMetadata: func
+};
 
 const mapStateToProps = (state) => {
     return {
-
+        video: getSelectedVideo(state.videos)
     }
 };
 
