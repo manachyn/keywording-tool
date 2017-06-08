@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './styles.css';
 
-const { number, string, func } = PropTypes;
+const { number, func } = PropTypes;
 
 export class Handle extends Component {
     static propTypes = {
-        id: string.isRequired,
+        id: number.isRequired,
         factor: number.isRequired,
         onResizing: func.isRequired,
         onResized: func.isRequired

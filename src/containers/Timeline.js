@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
-import { remove, resize } from '../modules/slices/actions';
+import { addAndStartSlicing, remove, resize } from '../modules/slicing/actions';
+import { getAllSlices } from '../modules/slicing/reducers/slices';
 import Timeline from '../components/Timeline';
 
 const mapStateToProps = (state) => {
@@ -7,7 +8,8 @@ const mapStateToProps = (state) => {
         currentTime: state.video.currentTime,
         currentPercentage: state.video.currentPercentage,
         duration: state.video.duration,
-        slices: state.slices,
+        slices: getAllSlices(state.slices),
+        slicingSlices: state.slices.slicingIds
     }
 };
 
@@ -18,7 +20,13 @@ const mapDispatchToProps = (dispatch) => {
         },
         onRemoveSlice: (id) => {
             dispatch(remove(id))
-        }
+        },
+        onSetInPoint: (currentTime) => {
+            dispatch(addAndStartSlicing(currentTime))
+        },
+        onSetOutPoint: () => {
+            console.log('Out');
+        },
     }
 };
 

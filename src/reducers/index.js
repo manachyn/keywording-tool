@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
 import video from '../modules/video/reducers';
-import slices from '../modules/slices/reducers';
+import slices from '../modules/slicing/reducers/slices';
 
 const rootReducer = combineReducers({
     video,

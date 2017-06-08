@@ -46,6 +46,9 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/,
+                include: [
+                    resolve(__dirname, 'src')
+                ],
                 use: [
                     'style-loader',
                     {
@@ -58,6 +61,17 @@ module.exports = {
                             //sourceMap: true,
                         }
                     },
+                    'postcss-loader',
+                ],
+            },
+            {
+                test: /\.css$/,
+                exclude: [
+                    resolve(__dirname, 'src')
+                ],
+                use: [
+                    'style-loader',
+                    'css-loader',
                     'postcss-loader',
                 ],
             },

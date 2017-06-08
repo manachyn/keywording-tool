@@ -9,3 +9,24 @@
     /*transition: all 0.5s ease-in-out;*/
     /*transition:left 1s linear;*/
 }
+
+.controls {
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: 100px;
+    height: 50px;
+    background: #0066CB;
+}
+
+.in {
+
+}
+
+.out {
+
+}
+
+.time {
+
+}

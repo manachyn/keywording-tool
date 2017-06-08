@@ -1,8 +1,10 @@
 import React from 'react';
 
+import Uploader from './../../containers/Uploader';
+
 const Upload = () => (
     <div>
-        <h2>Upload</h2>
+        <Uploader/>
     </div>
 );
 

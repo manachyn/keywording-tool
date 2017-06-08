@@ -21,8 +21,11 @@ export default class Timeline extends Component {
         currentPercentage: number,
         duration: number,
         slices: arrayOf(sliceShape),
+        slicingSlices: arrayOf(number),
         onResizeSlice: func.isRequired,
-        onRemoveSlice: func.isRequired
+        onRemoveSlice: func.isRequired,
+        onSetInPoint: func.isRequired,
+        onSetOutPoint: func.isRequired,
     };
 
     static defaultProps = {
@@ -63,6 +66,13 @@ export default class Timeline extends Component {
         }
     };
 
+    handleSetInPoint = () => {
+        this.props.onSetInPoint(this.props.currentTime);
+    };
+
+    handleSetOutPoint = () => {
+    };
+
     handleResizeSlice = (sliceId, offsetDelta, durationDelta, factor) => {
         this.props.onResizeSlice(sliceId, offsetDelta, durationDelta, factor);
     };
@@ -83,6 +93,20 @@ export default class Timeline extends Component {
         // //ctx.drawImage(this.video, 0, 0);
     }
 
+    getElementX = (element, containerWidth) => {
+        const { duration } = this.props;
+
+        return containerWidth * element.offset / duration;
+    };
+
+    getElementWidth = (element, containerWidth) => {
+        const { currentTime, duration, slicingSlices } = this.props;
+
+        return slicingSlices.indexOf(element.id) !== -1
+            ? containerWidth * (currentTime - element.offset) / duration
+            : containerWidth * element.duration / duration;
+    };
+
     render() {
         const {
             currentTime,
@@ -98,10 +122,16 @@ export default class Timeline extends Component {
                 <canvas ref={ref => (this.canvas = ref)} />
                 <SlicesLayer elements={slices}
                              duration={duration}
+                             currentTime={currentTime}
+                             elementX={this.getElementX}
+                             elementWidth={this.getElementWidth}
                              onResizeElement={onResizeSlice}
                              onRemoveElement={onRemoveSlice}
                 />
-                <Indicator currentTime={currentTime} currentPercentage={currentPercentage} />
+                <Indicator currentTime={currentTime}
+                           currentPercentage={currentPercentage}
+                           onSetInPoint={this.handleSetInPoint}
+                           onSetOutPoint={this.handleSetOutPoint} />
                 <video ref={ref => (this.video = ref)} preload="auto" muted={true} autoPlay={false} style={{display: 'none'}}>
                     <source src={this.props.src} />
                 </video>

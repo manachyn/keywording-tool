@@ -15,8 +15,11 @@ function ElementsLayer(LayerElementComponent) {
         static propTypes = {
             elements: arrayOf(elementShape).isRequired,
             duration: number,
+            currentTime: number,
             containerWidth: number.isRequired,
             containerHeight: number.isRequired,
+            elementX: func.isRequired,
+            elementWidth: func.isRequired,
             onResizeElement: func.isRequired,
             onRemoveElement: func.isRequired
         };
@@ -36,11 +39,15 @@ function ElementsLayer(LayerElementComponent) {
         }
 
         renderElement(element) {
-            const { duration, containerWidth, onRemoveElement } = this.props;
+            const { containerWidth, elementX, elementWidth, onRemoveElement } = this.props;
             const { id } = element;
 
-            const x = containerWidth * element.offset / duration;
-            const width = containerWidth * element.duration / duration;
+            // const x = containerWidth * element.offset / duration;
+            // //const width = containerWidth * element.duration / duration;
+            // const width = containerWidth * (currentTime - element.offset) / duration;
+
+            const x = elementX(element, containerWidth);
+            const width = elementWidth(element, containerWidth);
 
             const itemProps = {id, x, width};
 
