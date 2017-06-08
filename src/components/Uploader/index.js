@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import FineUploaderTraditional from 'fine-uploader-wrappers';
 import Gallery from 'react-fine-uploader';
 
 import 'react-fine-uploader/gallery/gallery.css';
+
+const { func } = PropTypes;
 
 const uploader = new FineUploaderTraditional({
     options: {
@@ -18,7 +21,8 @@ const uploader = new FineUploaderTraditional({
         },
         deleteFile: {
             enabled: true,
-            endpoint: 'http://storage.loc/endpoint-cors.php'
+            endpoint: 'http://storage.loc/endpoint-cors.php',
+            method: 'POST'
         },
         request: {
             endpoint: 'http://storage.loc/endpoint-cors.php'
@@ -34,23 +38,39 @@ const isFileGone = status => {
 };
 
 class Uploader extends Component {
+    static propTypes = {
+        onFileUploaded: func,
+        onFileDeleted: func
+    };
+
     componentDidMount() {
         uploader.on('statusChange', this.handleStatusChange);
+        uploader.on('complete', this.handleComplete);
+        uploader.on('deleteComplete', this.handleDeleteComplete);
     }
 
     componentWillUnmount() {
-        console.log('Unmount Uploader');
         uploader.off('statusChange', this.handleStatusChange);
+        uploader.off('complete', this.handleComplete);
+        uploader.off('deleteComplete', this.handleDeleteComplete);
     }
 
     handleStatusChange = (id, oldStatus, newStatus) => {
-        console.log(id, oldStatus, newStatus);
+        console.log('StatusChange', id, oldStatus, newStatus);
         if (newStatus === 'submitted') {
 
         }
         else if (isFileGone(newStatus)) {
 
         }
+    };
+
+    handleComplete = (id, name, response) => {
+        if (this.props.onFileUploaded) this.props.onFileUploaded(id, 'http://storage.loc/files/' + response.uuid + '/' + name);
+    };
+
+    handleDeleteComplete = (id) => {
+        if (this.props.onFileDeleted) this.props.onFileDeleted(id);
     };
 
     render() {

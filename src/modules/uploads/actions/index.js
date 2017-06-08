@@ -6,11 +6,11 @@ import {
 
 let nextVideoId = 0;
 
-export function add(url) {
+export function add(url, id = nextVideoId++) {
     return {
         type: VIDEO_ADD,
         payload: {
-            id: nextVideoId++,
+            id,
             url
         },
     };
@@ -29,3 +29,9 @@ export function select(id) {
         payload: { id },
     };
 }
+
+export const addAndSelect = (url, id) => dispatch => {
+    const addAction = add(url, id);
+    dispatch(addAction);
+    dispatch(select(addAction.payload.id));
+};

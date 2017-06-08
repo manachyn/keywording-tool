@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-// import { addAndStartSlicing, remove, resize } from '../modules/slicing/actions';
+import { addAndSelect, remove } from '../modules/uploads/actions';
 // import { getAllSlices } from '../modules/slicing/reducers/slices';
 import Uploader from '../components/Uploader';
 
@@ -11,7 +11,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-
+        onFileUploaded: (id, url) => {
+            dispatch(addAndSelect(url, id))
+        },
+        onFileDeleted: (id) => {
+            dispatch(remove(id))
+        },
     }
 };
 

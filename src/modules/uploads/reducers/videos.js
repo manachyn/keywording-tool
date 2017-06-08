@@ -50,6 +50,11 @@ const selected = (state = initialState.videos.selected, action) => {
 
             return id;
         }
+        case VIDEO_REMOVE: {
+            const { id } = action.payload;
+
+            return id === state ? null : state;
+        }
         default:
             return state;
     }
