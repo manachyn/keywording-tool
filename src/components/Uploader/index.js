@@ -16,16 +16,16 @@ const uploader = new FineUploaderTraditional({
                 enabled: true
             },
             success: {
-                endpoint: "http://storage.loc/endpoint-cors.php?done"
+                endpoint: "http://workflow.mysitedemo.co.uk/endpoint-cors.php?done"
             }
         },
         deleteFile: {
             enabled: true,
-            endpoint: 'http://storage.loc/endpoint-cors.php',
+            endpoint: 'http://workflow.mysitedemo.co.uk/endpoint-cors.php',
             method: 'POST'
         },
         request: {
-            endpoint: 'http://storage.loc/endpoint-cors.php'
+            endpoint: 'http://workflow.mysitedemo.co.uk/endpoint-cors.php'
         },
         retry: {
             enableAuto: true
@@ -44,19 +44,19 @@ class Uploader extends Component {
     };
 
     componentDidMount() {
-        uploader.on('statusChange', this.handleStatusChange);
+        //uploader.on('statusChange', this.handleStatusChange);
         uploader.on('complete', this.handleComplete);
         uploader.on('deleteComplete', this.handleDeleteComplete);
     }
 
     componentWillUnmount() {
-        uploader.off('statusChange', this.handleStatusChange);
+        //uploader.off('statusChange', this.handleStatusChange);
         uploader.off('complete', this.handleComplete);
         uploader.off('deleteComplete', this.handleDeleteComplete);
     }
 
     handleStatusChange = (id, oldStatus, newStatus) => {
-        console.log('StatusChange', id, oldStatus, newStatus);
+        //console.log('StatusChange', id, oldStatus, newStatus);
         if (newStatus === 'submitted') {
 
         }
@@ -66,7 +66,7 @@ class Uploader extends Component {
     };
 
     handleComplete = (id, name, response) => {
-        if (this.props.onFileUploaded) this.props.onFileUploaded(id, 'http://storage.loc/files/' + response.uuid + '/' + name);
+        if (this.props.onFileUploaded) this.props.onFileUploaded(id, 'http://workflow.mysitedemo.co.uk/files/' + response.uuid + '/' + name);
     };
 
     handleDeleteComplete = (id) => {

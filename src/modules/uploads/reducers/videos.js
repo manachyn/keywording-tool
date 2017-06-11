@@ -75,4 +75,4 @@ export const getSelectedVideo = (state) =>
     state.byId[state.selected];
 
 export const hasSelectedVideo = (state) =>
-    !!state.selected;
+    state.selected !== null;

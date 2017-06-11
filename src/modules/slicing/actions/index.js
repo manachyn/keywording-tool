@@ -1,8 +1,10 @@
 import {
     SLICE_ADD,
-    SLICE_START_SLICING,
     SLICE_REMOVE,
-    SLICE_RESIZE
+    SLICE_RESIZE,
+    SLICE_SET_FINISH_TIME,
+    SLICING_START,
+    SLICING_FINISH
 } from '../constants/actionTypes';
 
 let nextSliceId = 0;
@@ -17,19 +19,6 @@ export function add(offset, duration = 0) {
         },
     };
 }
-
-export const startSlicing = (id) => {
-    return {
-        type: SLICE_START_SLICING,
-        payload: { id },
-    };
-};
-
-export const addAndStartSlicing = (offset, duration = 0) => dispatch => {
-    const addAction = add(offset, duration);
-    dispatch(addAction);
-    dispatch(startSlicing(addAction.payload.id));
-};
 
 export function remove(id) {
     return {
@@ -49,3 +38,43 @@ export function resize(id, offsetDelta, durationDelta, factor) {
         },
     };
 }
+
+export const setFinishTime = (id, time) => {
+    return {
+        type: SLICE_SET_FINISH_TIME,
+        payload: { id, time },
+    };
+};
+
+export const startSlicing = (id) => {
+    return {
+        type: SLICING_START,
+        payload: { id },
+    };
+};
+
+export const finishSlicing = (offset) => {
+    return {
+        type: SLICING_FINISH,
+        payload: { offset },
+    };
+};
+
+export const setInPoint = (offset) => (dispatch, getState) => {
+    const { slices } = getState();
+    if (slices.slicingId !== null) {
+        dispatch(finishSlicing());
+    } else {
+        const addAction = add(offset);
+        dispatch(addAction);
+        dispatch(startSlicing(addAction.payload.id));
+    }
+};
+
+export const setOutPoint = (offset) => (dispatch, getState) => {
+    const { slices } = getState();
+    if (slices.slicingId !== null) {
+        dispatch(finishSlicing());
+        dispatch(setFinishTime(slices.slicingId, offset));
+    }
+};

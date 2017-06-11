@@ -21,6 +21,7 @@ export default class Video extends Component {
     static propTypes = {
         ...videoOwnProps,
         children: node,
+        currentTime: number,
         onTimeUpdate: func,
         onLoadedMetadata: func
     };
@@ -28,7 +29,8 @@ export default class Video extends Component {
     static defaultProps = {
         preload: 'metadata',
         autoPlay: false,
-        controls: false
+        controls: false,
+        currentTime: 0
     };
 
     constructor(props) {
@@ -47,6 +49,9 @@ export default class Video extends Component {
     }
 
     handleLoadedMetadata = () => {
+        if (this.props.currentTime > 0) {
+            this.video.currentTime = this.props.currentTime;
+        }
         if (this.props.onLoadedMetadata) this.props.onLoadedMetadata({
             duration: this.video.duration,
             size: this.getSize()

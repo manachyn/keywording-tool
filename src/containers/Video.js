@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { loadedMetadata, timeUpdate } from '../modules/video/actions';
 import VideoComponent from '../components/Video';
 import videoShape from '../components/Uploader/Video/shape';
-const { func } = PropTypes;
+const { number, func } = PropTypes;
 
 import { getSelectedVideo } from '../modules/uploads/reducers/videos';
 
@@ -17,13 +17,19 @@ const Video = ({ video, ...other }) => (
 
 Video.propTypes = {
     video: videoShape.isRequired,
+    currentTime: number,
     onTimeUpdate: func,
     onLoadedMetadata: func
 };
 
+Video.defaultProps = {
+    currentTime: 0
+};
+
 const mapStateToProps = (state) => {
     return {
-        video: getSelectedVideo(state.videos)
+        video: getSelectedVideo(state.videos),
+        currentTime: state.video.currentTime
     }
 };
 

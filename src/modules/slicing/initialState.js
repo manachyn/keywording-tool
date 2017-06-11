@@ -1,5 +1,5 @@
 export default {
     byId: {},
     allIds: [],
-    slicingIds: []
+    slicingId: null
 };

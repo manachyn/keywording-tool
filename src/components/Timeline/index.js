@@ -20,9 +20,9 @@ export default class Timeline extends Component {
         frameWidth: number,
         currentTime: number,
         currentPercentage: number,
-        duration: number,
+        duration: number.isRequired,
         slices: arrayOf(sliceShape),
-        slicingSlices: arrayOf(number),
+        slicingSliceId: number,
         onResizeSlice: func.isRequired,
         onRemoveSlice: func.isRequired,
         onSetInPoint: func.isRequired,
@@ -30,7 +30,9 @@ export default class Timeline extends Component {
     };
 
     static defaultProps = {
-        frameWidth: 100
+        frameWidth: 100,
+        currentTime: 0,
+        currentPercentage: 0
     };
 
     componentDidMount() {
@@ -72,6 +74,7 @@ export default class Timeline extends Component {
     };
 
     handleSetOutPoint = () => {
+        this.props.onSetOutPoint(this.props.currentTime);
     };
 
     handleResizeSlice = (sliceId, offsetDelta, durationDelta, factor) => {
@@ -90,7 +93,7 @@ export default class Timeline extends Component {
         //     this.video.currentTime = i * frameDuration;
         //     //let frameX = i * frameWidth;
         //     // ctx.drawImage(this.video, 0, 0);
-        // }
+        // }duration={duration}
         // //ctx.drawImage(this.video, 0, 0);
     }
 
@@ -101,9 +104,9 @@ export default class Timeline extends Component {
     };
 
     getElementWidth = (element, containerWidth) => {
-        const { currentTime, duration, slicingSlices } = this.props;
+        const { currentTime, duration, slicingSliceId } = this.props;
 
-        return slicingSlices.indexOf(element.id) !== -1
+        return slicingSliceId === element.id
             ? containerWidth * (currentTime - element.offset) / duration
             : containerWidth * element.duration / duration;
     };
@@ -114,9 +117,12 @@ export default class Timeline extends Component {
             currentPercentage,
             duration,
             slices,
+            slicingSliceId,
             onResizeSlice,
             onRemoveSlice
         } = this.props;
+
+        const slicing = slicingSliceId !== null;
 
         return (
             <div ref={ref => (this.timeline = ref)} styleName="timeline">
@@ -129,8 +135,10 @@ export default class Timeline extends Component {
                              onResizeElement={onResizeSlice}
                              onRemoveElement={onRemoveSlice}
                 />
-                <Indicator currentTime={currentTime}
+                <Indicator duration={duration}
+                           currentTime={currentTime}
                            currentPercentage={currentPercentage}
+                           slicing={slicing}
                            onSetInPoint={this.handleSetInPoint}
                            onSetOutPoint={this.handleSetOutPoint} />
                 <video ref={ref => (this.video = ref)} preload="auto" muted={true} autoPlay={false} style={{display: 'none'}}>

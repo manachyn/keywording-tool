@@ -2,9 +2,11 @@ import { combineReducers } from 'redux';
 
 import {
     SLICE_ADD,
-    SLICE_START_SLICING,
     SLICE_REMOVE,
-    SLICE_RESIZE
+    SLICE_RESIZE,
+    SLICE_SET_FINISH_TIME,
+    SLICING_START,
+    SLICING_FINISH
 } from '../constants/actionTypes';
 
 import slice from './slice';
@@ -35,6 +37,14 @@ const byId = (state = initialState.byId, action) => {
                 [id]: slice(state[id], action),
             };
         }
+        case SLICE_SET_FINISH_TIME: {
+            const { id } = action.payload;
+
+            return {
+                ...state,
+                [id]: slice(state[id], action),
+            };
+        }
         default:
             return state;
     }
@@ -42,25 +52,23 @@ const byId = (state = initialState.byId, action) => {
 
 const allIds = (state = initialState.allIds, action) => {
     switch (action.type) {
-        case SLICE_ADD: {
-            const { id } = action.payload;
-
-            return [...state, id];
-        }
+        case SLICE_ADD:
+            return [...state, action.payload.id];
+        case SLICE_REMOVE:
+            return state.filter(id =>
+                slice.id !== action.payload.id
+            );
         default:
             return state;
     }
 };
 
-const slicingIds = (state = initialState.slicingIds, action) => {
+const slicingId = (state = initialState.slicingId, action) => {
     switch (action.type) {
-        case SLICE_START_SLICING:
-            const { id } = action.payload;
-            if (state.indexOf(id) !== -1) {
-                return state
-            }
-            return [...state, id];
-            //return state.concat(id);
+        case SLICING_START:
+            return action.payload.id;
+        case SLICING_FINISH:
+            return null;
         default:
             return state
     }
@@ -69,13 +77,10 @@ const slicingIds = (state = initialState.slicingIds, action) => {
 const slices = combineReducers({
     byId,
     allIds,
-    slicingIds
+    slicingId
 });
 
 export default slices;
 
 export const getAllSlices = (state) =>
     state.allIds.map(id => state.byId[id]);
-
-export const getSlicingSlices = (state) =>
-    state.slicingIds.map(id => state.byId[id]);

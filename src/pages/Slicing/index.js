@@ -6,6 +6,10 @@ import Timeline from "./../../containers/Timeline";
 const Slicing = () => (
     <div>
         <Video/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
         <Timeline/>
     </div>
 );

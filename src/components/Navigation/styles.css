@@ -1,0 +1,32 @@
+.navigation {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10px 0;
+}
+
+.navigation li {
+    display: inline-block;
+    color: #FFF;
+    font-size: 18px;
+}
+
+.navigation li a,
+.navigation li span {
+    padding: 5px 10px;
+    background: #0066CB;
+    display: block;
+    color: #FFF;
+}
+
+.navigation li a {
+    text-decoration: none;
+}
+
+.navigation li a.active {
+    background: none;
+    color: #0066CB;
+}
+
+.navigation li span {
+    opacity: 0.8;
+}
