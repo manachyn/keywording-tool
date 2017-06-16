@@ -1,8 +1,12 @@
 import PropTypes from 'prop-types';
 
-const { number, string } = PropTypes;
+const { number, string, bool } = PropTypes;
 
 export default {
     id: number.isRequired,
-    url: string.isRequired
+    url: string,
+    status: string,
+    fromServer: bool,
+    currentTime: number,
+    duration: number,
 };

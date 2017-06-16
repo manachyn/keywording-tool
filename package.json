@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "babel-plugin-react-css-modules": "^2.7.0",
+    "classnames": "^2.2.5",
     "fine-uploader": "^5.14.4",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.4",

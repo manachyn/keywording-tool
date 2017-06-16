@@ -3,6 +3,10 @@ import {
     VIDEO_TIME_UPDATE,
 } from '../constants/actionTypes';
 
+import {
+    VIDEO_SELECT
+} from '../../uploads/constants/actionTypes';
+
 import initialState from '../initialState';
 
 export default function video(state = initialState, action) {
@@ -21,6 +25,13 @@ export default function video(state = initialState, action) {
                 currentTime: currentTime,
                 currentPercentage,
                 duration,
+            });
+        }
+        case VIDEO_SELECT: {
+            return Object.assign({}, state, {
+                currentTime: 0,
+                currentPercentage: 0,
+                duration: 0
             });
         }
         default:

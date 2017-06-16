@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
+import omit from 'lodash/omit';
 
 import {
     VIDEO_ADD,
+    VIDEO_UPDATE,
     VIDEO_REMOVE,
     VIDEO_SELECT
 } from '../constants/actionTypes';
@@ -19,13 +21,16 @@ const byId = (state = initialState.videos.byId, action) => {
                 [id]: video(undefined, action)
             };
         }
-        case VIDEO_REMOVE: {
+        case VIDEO_UPDATE: {
             const { id } = action.payload;
 
-            return state.filter(video =>
-                video.id !== id
-            );
+            return {
+                ...state,
+                [id]: video(state[id], action)
+            };
         }
+        case VIDEO_REMOVE:
+            return omit(state, action.payload.id);
         default:
             return state;
     }
@@ -38,6 +43,10 @@ const allIds = (state = initialState.videos.allIds, action) => {
 
             return [...state, id];
         }
+        case VIDEO_REMOVE:
+            return state.filter(id =>
+                id !== action.payload.id
+            );
         default:
             return state;
     }
@@ -73,6 +82,9 @@ export const getAllVideos = (state) =>
 
 export const getSelectedVideo = (state) =>
     state.byId[state.selected];
+
+export const getSelectedVideoId = (state) =>
+    state.selected;
 
 export const hasSelectedVideo = (state) =>
     state.selected !== null;

@@ -7,12 +7,13 @@ import {
 const slice = (state = {}, action) => {
     switch (action.type) {
         case SLICE_ADD:
-            const { id, offset, duration } = action.payload;
+            const { id, offset, duration, videoId } = action.payload;
 
             return {
                 id,
                 offset,
-                duration
+                duration,
+                videoId
             };
         case SLICE_RESIZE: {
             const {

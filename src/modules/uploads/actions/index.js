@@ -1,17 +1,32 @@
 import {
     VIDEO_ADD,
+    VIDEO_UPDATE,
     VIDEO_REMOVE,
     VIDEO_SELECT
 } from '../constants/actionTypes';
 
 let nextVideoId = 0;
 
-export function add(url, id = nextVideoId++) {
+export function add(id = nextVideoId++, fromServer = false) {
     return {
         type: VIDEO_ADD,
+        payload: { id, fromServer, currentTime: 0, duration: 0 },
+    };
+}
+
+export const uploaded = (id) => (dispatch, getState) => {
+    const { videos } = getState();
+    if (videos.allIds.indexOf(id) !== -1) {
+        add(id, true);
+    }
+};
+
+export function update(id, data) {
+    return {
+        type: VIDEO_UPDATE,
         payload: {
             id,
-            url
+            ...data
         },
     };
 }

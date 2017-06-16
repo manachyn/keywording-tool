@@ -82,5 +82,7 @@ const slices = combineReducers({
 
 export default slices;
 
-export const getAllSlices = (state) =>
-    state.allIds.map(id => state.byId[id]);
+export const getAllSlices = (state, videoId) =>
+    state.allIds.map(id => state.byId[id]).filter(slice =>
+        slice.videoId === videoId
+    );

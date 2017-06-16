@@ -9,11 +9,12 @@ import {
 
 let nextSliceId = 0;
 
-export function add(offset, duration = 0) {
+export function add(videoId, offset, duration = 0) {
     return {
         type: SLICE_ADD,
         payload: {
             id: nextSliceId++,
+            videoId,
             offset,
             duration
         },
@@ -60,12 +61,13 @@ export const finishSlicing = (offset) => {
     };
 };
 
-export const setInPoint = (offset) => (dispatch, getState) => {
+export const setInPoint = (offset, videoId) => (dispatch, getState) => {
     const { slices } = getState();
     if (slices.slicingId !== null) {
         dispatch(finishSlicing());
     } else {
-        const addAction = add(offset);
+        const { videos } = getState();
+        const addAction = add(videos.selected, offset);
         dispatch(addAction);
         dispatch(startSlicing(addAction.payload.id));
     }
