@@ -9,6 +9,14 @@ import {
     SLICING_FINISH
 } from '../constants/actionTypes';
 
+import {
+    PROCESSING_COMPLETED
+} from '../../processing/constants/actionTypes';
+
+import {
+    STATUS_NEW
+} from '../constants/statuses';
+
 import slice from './slice';
 import initialState from '../initialState';
 
@@ -44,6 +52,15 @@ const byId = (state = initialState.byId, action) => {
                 ...state,
                 [id]: slice(state[id], action),
             };
+        }
+        case PROCESSING_COMPLETED: {
+            const { slicesIds, result } = action.payload;
+            const newState = { ...state };
+            result.forEach(function (sliceUrl, index) {
+                newState[slicesIds[index]] = { ...newState[slicesIds[index]], url: sliceUrl }
+            });
+
+            return newState;
         }
         default:
             return state;
@@ -85,4 +102,9 @@ export default slices;
 export const getAllSlices = (state, videoId) =>
     state.allIds.map(id => state.byId[id]).filter(slice =>
         slice.videoId === videoId
+    );
+
+export const getNewSlices = (state, videoId) =>
+    state.allIds.map(id => state.byId[id]).filter(slice =>
+        slice.videoId === videoId && slice.status === STATUS_NEW
     );

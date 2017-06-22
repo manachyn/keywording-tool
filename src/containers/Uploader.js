@@ -3,6 +3,7 @@ import { add, uploaded, update, remove, select } from '../modules/uploads/action
 import { getAllVideos, getSelectedVideoId } from '../modules/uploads/reducers/videos';
 import UploaderComponent from '../components/Uploader';
 import FineUploaderTraditional from 'fine-uploader-wrappers';
+import { API_ROOT } from '../api';
 
 const uploader = new FineUploaderTraditional({
     options: {
@@ -12,23 +13,26 @@ const uploader = new FineUploaderTraditional({
                 enabled: true
             },
             success: {
-                endpoint: "http://workflow.mysitedemo.co.uk/endpoint-cors.php?done"
+                endpoint: API_ROOT + 'upload/combine'
             }
         },
         deleteFile: {
             enabled: true,
-            endpoint: 'http://workflow.mysitedemo.co.uk/endpoint-cors.php',
-            method: 'POST'
+            endpoint: API_ROOT + 'upload/delete',
+            // method: 'POST'
         },
         request: {
-            endpoint: 'http://workflow.mysitedemo.co.uk/endpoint-cors.php'
+            endpoint: API_ROOT + 'upload/upload',
         },
+        // resume: {
+        //     enabled: true
+        // },
         retry: {
-            enableAuto: true
+            enableAuto: true,
+            // showButton: true
         }
     }
 });
-
 
 const mapStateToProps = (state) => {
     return {

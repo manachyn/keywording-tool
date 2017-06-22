@@ -132,7 +132,7 @@ class Uploader extends Component {
             else if (isFileGone(status, statusEnum)) {
                 this._removeVisibleFile(id)
             }
-            else if (status === statusEnum.UPLOAD_SUCCESSFUL || status === statusEnum.UPLOAD_FAILED) {
+            else if (status === statusEnum.UPLOAD_SUCCESSFUL) {
                 this._fileUploaded(id)
                 this._updateVisibleFileStatus(id, status)
             }
@@ -276,7 +276,7 @@ class Uploader extends Component {
     }
 
     _onComplete = (id, name, response) => {
-        this.props.onFileUpdate(id, { url: response.url });
+        this.props.onFileUpdate(id, { uuid: response.uuid, name: response.name, url: response.url });
     };
 
     _handleFileClick = (id) => (e) => {

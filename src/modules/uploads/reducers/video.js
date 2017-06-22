@@ -13,6 +13,8 @@ const video = (state = {}, action) => {
         case VIDEO_UPDATE: {
             const {
                 id,
+                uuid,
+                name,
                 url,
                 status
             } = action.payload;
@@ -23,6 +25,8 @@ const video = (state = {}, action) => {
 
             return {
                 ...state,
+                uuid,
+                name,
                 url,
                 status
             };

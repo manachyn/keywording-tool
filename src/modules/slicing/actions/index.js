@@ -7,6 +7,10 @@ import {
     SLICING_FINISH
 } from '../constants/actionTypes';
 
+import {
+    STATUS_NEW
+} from '../constants/statuses';
+
 let nextSliceId = 0;
 
 export function add(videoId, offset, duration = 0) {
@@ -14,9 +18,10 @@ export function add(videoId, offset, duration = 0) {
         type: SLICE_ADD,
         payload: {
             id: nextSliceId++,
-            videoId,
             offset,
-            duration
+            duration,
+            videoId,
+            status: STATUS_NEW
         },
     };
 }
