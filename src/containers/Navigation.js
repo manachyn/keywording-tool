@@ -4,6 +4,7 @@ import Navigation from '../components/Navigation';
 
 const mapStateToProps = (state) => {
     return {
+        isInfoEnabled: hasSelectedVideo(state.videos),
         isSlicingEnabled: hasSelectedVideo(state.videos),
         isProcessingEnabled: hasSelectedVideo(state.videos)
     }

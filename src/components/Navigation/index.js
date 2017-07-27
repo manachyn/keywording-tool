@@ -4,10 +4,16 @@ import styles from './styles.css';
 
 import { NavLink } from 'react-router-dom';
 
-const Navigation = ({ isSlicingEnabled, isKeywordingEnabled, isProcessingEnabled }) => {
+const Navigation = ({ isInfoEnabled, isSlicingEnabled, isKeywordingEnabled, isProcessingEnabled }) => {
+    let info = null;
     let slicing = null;
     let keywording = null;
     let processing = null;
+    if (isInfoEnabled) {
+        info = <NavLink to="/info" activeClassName={styles.active}>Information</NavLink>;
+    } else {
+        info = <span>Information</span>;
+    }
     if (isSlicingEnabled) {
         slicing = <NavLink to="/slicing" activeClassName={styles.active}>Slicing</NavLink>;
     } else {
@@ -27,6 +33,7 @@ const Navigation = ({ isSlicingEnabled, isKeywordingEnabled, isProcessingEnabled
     return (
         <ul styleName="navigation">
             <li><NavLink to="/" activeClassName={styles.active}>Video Upload</NavLink></li>
+            <li>{info}</li>
             <li>{slicing}</li>
             <li>{keywording}</li>
             <li>{processing}</li>

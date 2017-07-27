@@ -6,6 +6,7 @@ import { ConnectedRouter } from 'react-router-redux';
 
 import Navigation from '../containers/Navigation';
 import Upload from '../pages/Upload';
+import Info from '../pages/Info';
 import Slicing from '../pages/Slicing';
 import Keywording from '../pages/Keywording';
 import Processing from '../pages/Processing';
@@ -15,7 +16,9 @@ const Root = ({ store, history }) => (
         <ConnectedRouter history={history}>
             <div>
                 <Navigation/>
-                <Route exact path="/" component={Upload}/>
+                {/*<Route exact path="/" component={Upload}/>*/}
+                <Route exact path="/" component={Info}/>
+                {/*<Route path="/info" component={Info}/>*/}
                 <Route path="/slicing" component={Slicing}/>
                 <Route path="/keywording" component={Keywording}/>
                 <Route path="/processing" component={Processing}/>

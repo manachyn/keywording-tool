@@ -1,0 +1,2 @@
+export const SLICE_SAVE_DATA = 'SLICE_SAVE_DATA';
+export const VIDEO_SAVE_DATA = 'VIDEO_SAVE_DATA';

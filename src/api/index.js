@@ -1,4 +1,4 @@
-export const API_ROOT = 'http://slicing.loc/api/v1/';
+export const API_ROOT = 'http://workflow.mysitedemo.co.uk/api/v1/';
 
 // const callApi = (endpoint, schema) => {
 //     const fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint
