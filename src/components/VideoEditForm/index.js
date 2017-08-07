@@ -9,6 +9,7 @@ import Button from 'react-bootstrap/lib/Button';
 import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
+import Clearfix from 'react-bootstrap/lib/Clearfix';
 import FieldFormControl from '../Form/FieldFormControl';
 import 'bootstrap/dist/css/bootstrap.css';
 // import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
@@ -25,15 +26,16 @@ let VideoEditForm = props => {
     return (
         <Grid>
             <Row>
-            <Form horizontal onSubmit={handleSubmit(submit)}>
+            <Form onSubmit={handleSubmit(submit)}>
                 <Col md={6}>
                     <Field type="text" name="code" component={FieldFormControl}>Code</Field>
                     <Field type="text" name="duration" component={FieldFormControl}>Duration</Field>
                     <Field type="text" name="title" component={FieldFormControl}>Title</Field>
                 </Col>
                 <Col md={6}>
-                    <Field name="description" component="textarea">Description</Field>
+                    <Field name="description" component={FieldFormControl}>Description</Field>
                 </Col>
+                <Clearfix></Clearfix>
                 <Col md={6}>
                     <Button bsStyle="primary" type="submit">Submit</Button>
                 </Col>
