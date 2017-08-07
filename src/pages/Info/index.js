@@ -3,10 +3,19 @@ import React from 'react';
 import Video from './../../containers/Video';
 import VideoEditForm from './../../containers/VideoEditForm';
 
+import Tabs from 'react-bootstrap/lib/Tabs';
+import Tab from 'react-bootstrap/lib/Tab';
+
 const Info = () => (
     <div>
         {/*<Video/>*/}
-        <VideoEditForm test="Ivan"/>
+        <Tabs defaultActiveKey={1} id="info-tabs">
+            <Tab eventKey={1} title="Main info">
+                <VideoEditForm/>
+            </Tab>
+            <Tab eventKey={2} title="Attributes">Attributes</Tab>
+            <Tab eventKey={3} title="Metadata">Metadata</Tab>
+        </Tabs>
     </div>
 );
 
