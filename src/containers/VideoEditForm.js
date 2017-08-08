@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 
 import VideoEditForm from '../components/VideoEditForm';
 import { getEditingVideoId, getVideoData } from '../modules/info/reducers/info';
+import { saveVideoData } from '../modules/info/actions';
 
 const mapStateToProps = (state) => {
     const videoId = getEditingVideoId(state.info);
@@ -15,7 +16,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onSubmit: (videoId, values) => {
-            console.log(values);
+            //dispatch(saveVideoData(videoId, values))
         }
     }
 };

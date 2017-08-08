@@ -1,7 +1,8 @@
 export default {
     byVideoId: {
         1: {
-            email: ''
+            email: '',
+            code: 'CP12345'
         }
     },
     bySliceId: {},

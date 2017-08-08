@@ -6,10 +6,12 @@ import VideoEditForm from './../../containers/VideoEditForm';
 import Tabs from 'react-bootstrap/lib/Tabs';
 import Tab from 'react-bootstrap/lib/Tab';
 
+import './styles.css';
+
 const Info = () => (
     <div>
         {/*<Video/>*/}
-        <Tabs defaultActiveKey={1} id="info-tabs">
+        <Tabs defaultActiveKey={1} styleName="infoTabs">
             <Tab eventKey={1} title="Main info">
                 <VideoEditForm/>
             </Tab>
