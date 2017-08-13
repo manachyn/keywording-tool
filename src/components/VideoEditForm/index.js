@@ -11,9 +11,16 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 let VideoEditForm = props => {
     const { videoId, onSubmit, handleSubmit, submitting } = props;
+
     const submit = values => {
-        onSubmit(videoId, values);
-        // reset();
+        return onSubmit(videoId, values);
+        // this.props.handleSubmit(data)
+        //     .then(() => {
+        //         this.setState({saved: true});
+        //         setTimeout(() => {
+        //             this.setState({saved: false});
+        //         }, 5000); // show message for 5 seconds
+        //     })
     };
 
     return (

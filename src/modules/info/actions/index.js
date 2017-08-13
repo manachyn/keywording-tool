@@ -22,3 +22,10 @@ export const saveVideoData = (id, data) => {
         }
     };
 };
+
+export const submitVideoData = (id, data, dispatch) => {
+    return new Promise((resolve) => {
+        dispatch(saveVideoData(id, data));
+        resolve();
+    });
+};

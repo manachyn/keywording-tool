@@ -7,6 +7,7 @@ import slices from '../modules/slicing/reducers/slices';
 import videos from '../modules/uploads/reducers/videos';
 import processing from '../modules/processing/reducers';
 import info from '../modules/info/reducers/info';
+import flashMessages from '../modules/flashMessages/reducers';
 
 const rootReducer = combineReducers({
     video,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
     videos,
     processing,
     info,
+    flashMessages,
     router: routerReducer,
     form: formReducer
 });

@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import VideoEditForm from '../components/VideoEditForm';
 import { getEditingVideoId, getVideoData } from '../modules/info/reducers/info';
-import { saveVideoData } from '../modules/info/actions';
+import { submitVideoData } from '../modules/info/actions';
 
 const mapStateToProps = (state) => {
     const videoId = getEditingVideoId(state.info);
@@ -15,8 +15,16 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        // // Sync
+        // onSubmit: (videoId, values) => {
+        //     dispatch(saveVideoData(videoId, values));
+        // },
+        // Async
         onSubmit: (videoId, values) => {
-            //dispatch(saveVideoData(videoId, values))
+            return submitVideoData(videoId, values, dispatch);
+        },
+        onSubmitSuccess: (result, dispatch, props) => {
+
         }
     }
 };
