@@ -11,7 +11,7 @@ const initialState = [];
 const flashMessages = (state = initialState, action) => {
     switch (action.type) {
         case ADD_FLASH_MESSAGE:
-            return [...state.messages, message(undefined, action)];
+            return [...state, message(undefined, action)];
         case REMOVE_FLASH_MESSAGE: {
             const { id } = action.payload;
 

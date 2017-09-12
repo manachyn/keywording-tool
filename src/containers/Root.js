@@ -5,6 +5,7 @@ import { Route } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
 
 import Navigation from '../containers/Navigation';
+import FlashMessages from '../containers/FlashMessagesList';
 import Upload from '../pages/Upload';
 import Info from '../pages/Info';
 import Slicing from '../pages/Slicing';
@@ -16,6 +17,7 @@ const Root = ({ store, history }) => (
         <ConnectedRouter history={history}>
             <div>
                 <Navigation/>
+                <FlashMessages/>
                 {/*<Route exact path="/" component={Upload}/>*/}
                 <Route exact path="/" component={Info}/>
                 {/*<Route path="/info" component={Info}/>*/}

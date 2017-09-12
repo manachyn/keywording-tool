@@ -10,7 +10,7 @@ import {
     WARNING_MESSAGE
 } from '../constants/messageTypes';
 
-let nextVideoId = 0;
+let nextMessageId = 0;
 
 const DEFAULT_TIMEOUT = 3000;
 
@@ -48,7 +48,7 @@ export const addWarningMessage = (message) => {
 
 export const addMessage = (message, type, options = {}) => {
     const { timeout = DEFAULT_TIMEOUT, push } = options;
-    const id = nextVideoId++;
+    const id = nextMessageId++;
 
     return (dispatch) => {
         if (push) dispatch(clearMessages());

@@ -9,7 +9,7 @@ import Clearfix from 'react-bootstrap/lib/Clearfix';
 import { renderField } from '../Form/FieldFormControl';
 import 'bootstrap/dist/css/bootstrap.css';
 
-let VideoEditForm = props => {
+let VideoMainInfoEditForm = props => {
     const { videoId, onSubmit, handleSubmit, submitting } = props;
 
     const submit = values => {
@@ -45,8 +45,8 @@ let VideoEditForm = props => {
     )
 };
 
-VideoEditForm = reduxForm({
-    form: 'videoForm'
-})(VideoEditForm);
+VideoMainInfoEditForm = reduxForm({
+    form: 'videoMainInfoEditForm'
+})(VideoMainInfoEditForm);
 
-export default VideoEditForm;
+export default VideoMainInfoEditForm;

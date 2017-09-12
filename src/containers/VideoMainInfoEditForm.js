@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
 
-import VideoEditForm from '../components/VideoEditForm';
+import VideoMainInfoEditForm from '../components/VideoMainInfoEditForm';
 import { getEditingVideoId, getVideoData } from '../modules/info/reducers/info';
 import { submitVideoData } from '../modules/info/actions';
+import { addSuccessMessage } from '../modules/flashMessages/actions';
 
 const mapStateToProps = (state) => {
     const videoId = getEditingVideoId(state.info);
@@ -24,7 +25,7 @@ const mapDispatchToProps = (dispatch) => {
             return submitVideoData(videoId, values, dispatch);
         },
         onSubmitSuccess: (result, dispatch, props) => {
-
+            dispatch(addSuccessMessage('Data has been saved'));
         }
     }
 };
@@ -32,4 +33,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(VideoEditForm);
+)(VideoMainInfoEditForm);
