@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 import { VIDEO_SAVE_DATA, SLICE_SAVE_DATA } from '../constants/actionTypes';
 import { VIDEO_SELECT } from '../../../modules/uploads/constants/actionTypes';
 
-import video from './slice';
+import video from './video';
 import slice from './slice';
 import initialState from '../initialState';
 
@@ -14,7 +14,7 @@ const byVideoId = (state = initialState.byVideoId, action) => {
 
             return {
                 ...state,
-                [id]: video(undefined, action)
+                [id]: video(initialState.byVideoId[id], action)
             };
         }
         default:

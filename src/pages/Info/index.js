@@ -2,6 +2,8 @@ import React from 'react';
 
 import Video from './../../containers/Video';
 import VideoMainInfoEditForm from './../../containers/VideoMainInfoEditForm';
+import VideoAttributesEditForm from './../../containers/VideoAttributesEditForm';
+import VideoMetadataEditForm from './../../containers/VideoMetadataEditForm';
 
 import Tabs from 'react-bootstrap/lib/Tabs';
 import Tab from 'react-bootstrap/lib/Tab';
@@ -15,8 +17,12 @@ const Info = () => (
             <Tab eventKey={1} title="Main info">
                 <VideoMainInfoEditForm/>
             </Tab>
-            <Tab eventKey={2} title="Attributes">Attributes</Tab>
-            <Tab eventKey={3} title="Metadata">Metadata</Tab>
+            <Tab eventKey={2} title="Attributes">
+                <VideoAttributesEditForm/>
+            </Tab>
+            <Tab eventKey={3} title="Metadata">
+                <VideoMetadataEditForm/>
+            </Tab>
         </Tabs>
     </div>
 );
