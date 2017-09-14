@@ -1,7 +1,17 @@
 import {
+    SLICE_EDIT_DATA,
     SLICE_SAVE_DATA,
     VIDEO_SAVE_DATA
 } from '../constants/actionTypes';
+
+export const editSliceData = (id) => {
+    return {
+        type: SLICE_EDIT_DATA,
+        payload: {
+            id
+        }
+    };
+};
 
 export const saveSliceData = (id, data) => {
     return {

@@ -9,22 +9,24 @@ import FlashMessages from '../containers/FlashMessagesList';
 import Upload from '../pages/Upload';
 import Info from '../pages/Info';
 import Slicing from '../pages/Slicing';
-import Keywording from '../pages/Keywording';
+import Editing from '../pages/Editing';
 import Processing from '../pages/Processing';
+
+import Grid from 'react-bootstrap/lib/Grid';
 
 const Root = ({ store, history }) => (
     <Provider store={store}>
         <ConnectedRouter history={history}>
-            <div>
+            <Grid bsClass="container-fluid">
                 <Navigation/>
                 <FlashMessages/>
-                {/*<Route exact path="/" component={Upload}/>*/}
-                <Route exact path="/" component={Info}/>
-                {/*<Route path="/info" component={Info}/>*/}
+                <Route exact path="/" component={Upload}/>
+                {/*<Route exact path="/" component={Info}/>*/}
+                <Route path="/info" component={Info}/>
                 <Route path="/slicing" component={Slicing}/>
-                <Route path="/keywording" component={Keywording}/>
+                <Route path="/editing" component={Editing}/>
                 <Route path="/processing" component={Processing}/>
-            </div>
+            </Grid>
         </ConnectedRouter>
     </Provider>
 );

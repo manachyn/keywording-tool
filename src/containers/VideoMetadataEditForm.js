@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
 
     return {
         videoId,
-        initialValues: getVideoData(state.info, videoId)
+        //initialValues: getVideoData(state.info, videoId)
     }
 };
 

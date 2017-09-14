@@ -4,10 +4,10 @@ import styles from './styles.css';
 
 import { NavLink } from 'react-router-dom';
 
-const Navigation = ({ isInfoEnabled, isSlicingEnabled, isKeywordingEnabled, isProcessingEnabled }) => {
+const Navigation = ({ isInfoEnabled, isSlicingEnabled, isEditingEnabled, isProcessingEnabled }) => {
     let info = null;
     let slicing = null;
-    let keywording = null;
+    let editing = null;
     let processing = null;
     if (isInfoEnabled) {
         info = <NavLink to="/info" activeClassName={styles.active}>Information</NavLink>;
@@ -19,10 +19,10 @@ const Navigation = ({ isInfoEnabled, isSlicingEnabled, isKeywordingEnabled, isPr
     } else {
         slicing = <span>Slicing</span>;
     }
-    if (isKeywordingEnabled) {
-        keywording = <NavLink to="/keywording" activeClassName={styles.active}>Keywording</NavLink>;
+    if (isEditingEnabled) {
+        editing = <NavLink to="/editing" activeClassName={styles.active}>Keywording</NavLink>;
     } else {
-        keywording = <span>Keywording</span>;
+        editing = <span>Keywording</span>;
     }
     if (isProcessingEnabled) {
         processing = <NavLink to="/processing" activeClassName={styles.active}>Processing</NavLink>;
@@ -35,7 +35,7 @@ const Navigation = ({ isInfoEnabled, isSlicingEnabled, isKeywordingEnabled, isPr
             <li><NavLink to="/" activeClassName={styles.active}>Video Upload</NavLink></li>
             <li>{info}</li>
             <li>{slicing}</li>
-            <li>{keywording}</li>
+            <li>{editing}</li>
             <li>{processing}</li>
         </ul>
     )
@@ -43,13 +43,13 @@ const Navigation = ({ isInfoEnabled, isSlicingEnabled, isKeywordingEnabled, isPr
 
 Navigation.propTypes = {
     isSlicingEnabled: PropTypes.bool,
-    isKeywordingEnabled: PropTypes.bool,
+    isEditingEnabled: PropTypes.bool,
     isProcessingEnabled: PropTypes.bool,
 };
 
 Navigation.defaultProps = {
     isSlicingEnabled: false,
-    isKeywordingEnabled: false,
+    isEditingEnabled: false,
     isProcessingEnabled: false,
 };
 

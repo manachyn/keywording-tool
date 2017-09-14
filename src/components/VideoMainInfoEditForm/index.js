@@ -2,7 +2,6 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import Form from 'react-bootstrap/lib/Form';
 import Button from 'react-bootstrap/lib/Button';
-import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import Clearfix from 'react-bootstrap/lib/Clearfix';
@@ -24,13 +23,12 @@ let VideoMainInfoEditForm = props => {
     };
 
     return (
-        <Grid>
-            <Row>
+        <Row>
             <Form onSubmit={handleSubmit(submit)}>
                 <Col md={6}>
                     <Field type="text" name="code" component={renderField} label="Code" />
                     <Field type="text" name="duration" component={renderField} label="Duration" />
-                    <Field type="text" name="title" component={renderField} placeholder="Title" label="Title" />
+                    <Field type="text" name="title" component={renderField} label="Title" />
                 </Col>
                 <Col md={6}>
                     <Field name="description" component={renderField} componentClass="textarea" label="Description" />
@@ -40,8 +38,7 @@ let VideoMainInfoEditForm = props => {
                     <Button bsStyle="primary" type="submit" disabled={submitting}>Submit</Button>
                 </Col>
             </Form>
-            </Row>
-        </Grid>
+        </Row>
     )
 };
 

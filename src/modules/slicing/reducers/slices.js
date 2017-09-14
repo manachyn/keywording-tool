@@ -108,3 +108,6 @@ export const getNewSlices = (state, videoId) =>
     state.allIds.map(id => state.byId[id]).filter(slice =>
         slice.videoId === videoId && slice.status === STATUS_NEW
     );
+
+export const hasSlices = (state, videoId) =>
+    getAllSlices(state, videoId).length > 0;

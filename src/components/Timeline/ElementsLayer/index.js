@@ -21,7 +21,8 @@ function ElementsLayer(LayerElementComponent) {
             elementX: func.isRequired,
             elementWidth: func.isRequired,
             onResizeElement: func.isRequired,
-            onRemoveElement: func.isRequired
+            onRemoveElement: func.isRequired,
+            onEditElement: func.isRequired,
         };
 
         constructor(props) {
@@ -39,7 +40,7 @@ function ElementsLayer(LayerElementComponent) {
         }
 
         renderElement(element) {
-            const { containerWidth, elementX, elementWidth, onRemoveElement } = this.props;
+            const { containerWidth, elementX, elementWidth, onRemoveElement, onEditElement } = this.props;
             const { id } = element;
 
             // const x = containerWidth * element.offset / duration;
@@ -53,7 +54,7 @@ function ElementsLayer(LayerElementComponent) {
 
             return (
                 <ResizableLayerItem key={element.id} { ...itemProps } onResize={this.resizeElement}>
-                    <LayerElementComponent { ...element } onDestroy={onRemoveElement} />
+                    <LayerElementComponent { ...element } onRemove={onRemoveElement} onEdit={onEditElement} />
                 </ResizableLayerItem>
             );
         }

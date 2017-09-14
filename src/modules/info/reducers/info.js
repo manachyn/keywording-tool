@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import { VIDEO_SAVE_DATA, SLICE_SAVE_DATA } from '../constants/actionTypes';
+import { VIDEO_SAVE_DATA, SLICE_EDIT_DATA, SLICE_SAVE_DATA } from '../constants/actionTypes';
 import { VIDEO_SELECT } from '../../../modules/uploads/constants/actionTypes';
 
 import video from './video';
@@ -14,7 +14,7 @@ const byVideoId = (state = initialState.byVideoId, action) => {
 
             return {
                 ...state,
-                [id]: video(initialState.byVideoId[id], action)
+                [id]: video(state[id], action)
             };
         }
         default:
@@ -46,10 +46,20 @@ const editingVideoId = (state = initialState.editingVideoId, action) => {
     }
 };
 
+const editingSliceId = (state = initialState.editingSliceId, action) => {
+    switch (action.type) {
+        case SLICE_EDIT_DATA:
+            return action.payload.id;
+        default:
+            return state;
+    }
+};
+
 const info = combineReducers({
     byVideoId,
     bySliceId,
-    editingVideoId
+    editingVideoId,
+    editingSliceId
 });
 
 export default info;

@@ -2,7 +2,6 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import Form from 'react-bootstrap/lib/Form';
 import Button from 'react-bootstrap/lib/Button';
-import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import Clearfix from 'react-bootstrap/lib/Clearfix';
@@ -17,8 +16,7 @@ let VideoMetadataEditForm = props => {
     };
 
     return (
-        <Grid>
-            <Row>
+        <Row>
             <Form onSubmit={handleSubmit(submit)}>
                 <Col md={6}>
                     <Field type="text" name="meta_title" component={renderField} label="Meta Title" />
@@ -32,8 +30,7 @@ let VideoMetadataEditForm = props => {
                     <Button bsStyle="primary" type="submit" disabled={submitting}>Submit</Button>
                 </Col>
             </Form>
-            </Row>
-        </Grid>
+        </Row>
     )
 };
 

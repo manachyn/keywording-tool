@@ -1,12 +1,6 @@
 export default {
-    byVideoId: {
-        1: {
-            email: '',
-            code: 'CP12345',
-            meta_title: 'Meta title'
-        }
-    },
+    byVideoId: {},
     bySliceId: {},
-    editingVideoId: 1,
+    editingVideoId: null,
     editingSliceId: null
 };

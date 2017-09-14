@@ -25,6 +25,7 @@ export default class Timeline extends Component {
         slicingSliceId: number,
         onResizeSlice: func.isRequired,
         onRemoveSlice: func.isRequired,
+        onEditSlice: func.isRequired,
         onSetInPoint: func.isRequired,
         onSetOutPoint: func.isRequired,
     };
@@ -77,14 +78,6 @@ export default class Timeline extends Component {
         this.props.onSetOutPoint(this.props.currentTime);
     };
 
-    handleResizeSlice = (sliceId, offsetDelta, durationDelta, factor) => {
-        this.props.onResizeSlice(sliceId, offsetDelta, durationDelta, factor);
-    };
-
-    handleRemoveSlice = (id) => {
-        this.props.onRemoveSlice(id);
-    };
-
     updateCanvas() {
         // const ctx = this.canvas.getContext('2d');
         //
@@ -119,7 +112,8 @@ export default class Timeline extends Component {
             slices,
             slicingSliceId,
             onResizeSlice,
-            onRemoveSlice
+            onRemoveSlice,
+            onEditSlice
         } = this.props;
 
         const slicing = slicingSliceId !== null;
@@ -134,6 +128,7 @@ export default class Timeline extends Component {
                              elementWidth={this.getElementWidth}
                              onResizeElement={onResizeSlice}
                              onRemoveElement={onRemoveSlice}
+                             onEditElement={onEditSlice}
                 />
                 <Indicator duration={duration}
                            currentTime={currentTime}
