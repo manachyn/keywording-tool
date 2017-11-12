@@ -14,6 +14,7 @@ export default class ResizableLayerItem extends Component {
         x: number.isRequired,
         width: number.isRequired,
         onResize: func.isRequired,
+        validateResize: func.isRequired,
         //children: node.isRequire,
     };
 
@@ -41,8 +42,9 @@ export default class ResizableLayerItem extends Component {
     handleResizing(delta, factor) {
         const x = this.state.x + (factor > 0 ? 0 : delta);
         const width = this.state.width + factor * delta;
-
-        this.setState({ x, width });
+        if (this.props.validateResize(this.props.id, x, width, factor)) {
+            this.setState({x, width});
+        }
     }
 
     handleResized(delta, factor) {

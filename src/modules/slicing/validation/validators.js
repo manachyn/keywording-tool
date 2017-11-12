@@ -19,7 +19,7 @@ export const validateSliceFinishOffset = (offset, sliceId, slices) => {
 
     for (let id of slices.allIds) {
         slice2 = slices.byId[id];
-        if (id != sliceId && Math.max(slice1.offset, slice2.offset) <= Math.min(offset, slice2.offset + slice2.duration)) {
+        if (id !== sliceId && Math.max(slice1.offset, slice2.offset) <= Math.min(offset, slice2.offset + slice2.duration)) {
             valid = false;
             break;
         }

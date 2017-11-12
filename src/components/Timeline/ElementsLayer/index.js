@@ -29,6 +29,50 @@ function ElementsLayer(LayerElementComponent) {
             super(props);
             this.resizeElement = this.resizeElement.bind(this);
             this.renderElement = this.renderElement.bind(this);
+            this.validateResize = this.validateResize.bind(this);
+        }
+
+        validateResize(id, x, width, factor) {
+            return factor > 0 ? this.validateFinishOffset(id, x, width) : this.validateStartOffset(id, x);
+        }
+
+        validateFinishOffset(id, x, width) {
+            const { elements, duration, containerWidth } = this.props;
+            if (x + width > containerWidth) {
+                return false;
+            }
+            const element = elements.find(item => item.id === id);
+            const newDuration = width * duration / containerWidth;
+            const newOffset = element.offset + newDuration;
+
+            let valid = true;
+            for (let element2 of this.props.elements) {
+                if (element2.id !== id && Math.max(element.offset, element2.offset) <= Math.min(newOffset, element2.offset + element2.duration)) {
+                    valid = false;
+                    break;
+                }
+            }
+
+            return valid;
+        }
+
+        validateStartOffset(id, x) {
+            if (x < 0) {
+                return false;
+            }
+
+            const { duration, containerWidth } = this.props;
+            const newOffset = x * duration / containerWidth;
+
+            let valid = true;
+            for (let element2 of this.props.elements) {
+                if (element2.id !== id && newOffset >= element2.offset && newOffset < element2.offset + element2.duration) {
+                    valid = false;
+                    break;
+                }
+            }
+
+            return valid;
         }
 
         resizeElement(id, x, width, factor) {
@@ -53,7 +97,7 @@ function ElementsLayer(LayerElementComponent) {
             const itemProps = {id, x, width};
 
             return (
-                <ResizableLayerItem key={element.id} { ...itemProps } onResize={this.resizeElement}>
+                <ResizableLayerItem key={element.id} { ...itemProps } onResize={this.resizeElement} validateResize={this.validateResize}>
                     <LayerElementComponent { ...element } onRemove={onRemoveElement} onEdit={onEditElement} />
                 </ResizableLayerItem>
             );
