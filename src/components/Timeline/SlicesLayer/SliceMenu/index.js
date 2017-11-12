@@ -24,16 +24,14 @@ export default class SliceMenu extends Component {
     render() {
         const { onRemove, onEdit } = this.props;
 
-        console.log(onRemove);
-
         if (!onRemove && !onEdit) {
             return null;
         }
 
         return (
             <div styleName="menu">
-                {onEdit && <Glyphicon glyph="pencil" onClick={this.handleEdit} />}
-                {onRemove && <br/> && <Glyphicon glyph="trash" onClick={this.handleRemove} />}
+                {onEdit && <Glyphicon styleName="menuItem" glyph="pencil" onClick={this.handleEdit} />}
+                {onRemove && <br/> && <Glyphicon styleName="menuItem" glyph="trash" onClick={this.handleRemove} />}
             </div>
         );
     }

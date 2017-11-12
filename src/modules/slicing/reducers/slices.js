@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import omit from 'lodash/omit';
 
 import {
     SLICE_ADD,
@@ -31,11 +32,7 @@ const byId = (state = initialState.byId, action) => {
             };
         }
         case SLICE_REMOVE: {
-            const { id } = action.payload;
-
-            return state.filter(slice =>
-                slice.id !== id
-            );
+            return omit(state, action.payload.id);
         }
         case SLICE_RESIZE: {
             const { id } = action.payload;
@@ -73,7 +70,7 @@ const allIds = (state = initialState.allIds, action) => {
             return [...state, action.payload.id];
         case SLICE_REMOVE:
             return state.filter(id =>
-                slice.id !== action.payload.id
+                id !== action.payload.id
             );
         default:
             return state;
@@ -86,6 +83,8 @@ const slicingId = (state = initialState.slicingId, action) => {
             return action.payload.id;
         case SLICING_FINISH:
             return null;
+        case SLICE_REMOVE:
+            return action.payload.id == state ? null : state;
         default:
             return state
     }

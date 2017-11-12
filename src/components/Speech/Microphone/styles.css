@@ -1,0 +1,3 @@
+:global(.form-control-feedback).microphone {
+    pointer-events: auto;
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pay per second</title>
+    <link href="dist/payPerSecond.css" rel="stylesheet">
+</head>
+<body>
+    <div>Price: <span id="price">0</span></div>
+    <div id="player"></div>
+    <br>
+    <br>
+    <br>
+    <div id="timeline"></div>
+
+    <script src="dist/payPerSecond.bundle.js"></script>
+    <script>
+        const pricePerSecond = 10;
+        const priceElement = document.getElementById('price');
+        document.addEventListener('DOMContentLoaded', function() {
+            function calculatePrice(slices) {
+                let totalDuration = 0;
+                slices.forEach(function(slice) {
+                    totalDuration += slice.duration;
+                });
+                priceElement.innerHTML = Math.round(pricePerSecond * totalDuration * 100) / 100;
+            }
+            payPerSecond.init({ video: 'http://vjs.zencdn.net/v/oceans.mp4', onStateChange: calculatePrice });
+            payPerSecond.renderPlayer('player');
+            payPerSecond.renderTimeline('timeline');
+        });
+    </script>
+</body>
+</html>

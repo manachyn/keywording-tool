@@ -22,7 +22,7 @@ function ElementsLayer(LayerElementComponent) {
             elementWidth: func.isRequired,
             onResizeElement: func.isRequired,
             onRemoveElement: func.isRequired,
-            onEditElement: func.isRequired,
+            onEditElement: func,
         };
 
         constructor(props) {

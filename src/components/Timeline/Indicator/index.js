@@ -11,7 +11,8 @@ class Indicator extends Component {
         currentPercentage: number.isRequired,
         onSetInPoint: func.isRequired,
         onSetOutPoint: func.isRequired,
-        slicing: bool,
+        canSetInPoint: bool.isRequired,
+        canSetOutPoint: bool.isRequired,
         containerWidth: number.isRequired,
         containerHeight: number.isRequired,
     };
@@ -19,11 +20,12 @@ class Indicator extends Component {
     static defaultProps = {
         currentTime: 0,
         currentPercentage: 0,
-        slicing: false
+        canSetInPoint: true,
+        canSetOutPoint: true
     };
 
     render() {
-        const { currentTime, currentPercentage, onSetInPoint, onSetOutPoint, containerWidth, slicing } = this.props;
+        const { currentTime, currentPercentage, onSetInPoint, onSetOutPoint, containerWidth, canSetInPoint, canSetOutPoint } = this.props;
         const left = containerWidth / 100 * currentPercentage;
         const controlsWidth = 100;
         const controlsHalfWidth = controlsWidth / 2;
@@ -34,13 +36,27 @@ class Indicator extends Component {
             controlsLeft = containerWidth - left - controlsWidth + 2;
         }
 
+        let setInPointButton = null;
+        let setOutPointButton = null;
+        if (canSetInPoint) {
+            setInPointButton = <div title="Set In Point (I)" styleName="in" onClick={onSetInPoint}></div>;
+        } else {
+            setInPointButton = <div title="Set In Point (I)" styleName="in disabled"></div>;
+        }
+
+        if (canSetOutPoint) {
+            setOutPointButton = <div title="Set Out Point (O)" styleName="out" onClick={onSetOutPoint}></div>;
+        } else {
+            setOutPointButton = <div title="Set Out Point (O)" styleName="out disabled"></div>;
+        }
+
         return (
             <div styleName="indicator" style={{ left: `${currentPercentage}%` }}>
                 <div styleName="controls" style={{ left: `${controlsLeft}px` }}>
                     <div styleName="time">{currentTime}</div>
                     <div styleName="buttons">
-                        <div title="Set In Point (I)" styleName={slicing ? 'in active' : 'in'} onClick={onSetInPoint}></div>
-                        <div title="Set Out Point (O)" styleName={slicing ? 'out' : 'out disabled'} onClick={onSetOutPoint}></div>
+                        {setInPointButton}
+                        {setOutPointButton}
                     </div>
                 </div>
             </div>

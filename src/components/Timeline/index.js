@@ -8,7 +8,7 @@ import SlicesLayer from './SlicesLayer';
 import sliceShape from './SlicesLayer/Slice/shape';
 import videoShape from '../Uploader/Video/shape';
 
-const { string, number, arrayOf, func } = PropTypes;
+const { string, number, arrayOf, func, bool } = PropTypes;
 
 const timelineStyle = {
     width: '100%'
@@ -25,15 +25,19 @@ export default class Timeline extends Component {
         slicingSliceId: number,
         onResizeSlice: func.isRequired,
         onRemoveSlice: func.isRequired,
-        onEditSlice: func.isRequired,
+        onEditSlice: func,
         onSetInPoint: func.isRequired,
         onSetOutPoint: func.isRequired,
+        canSetInPoint: bool.isRequired,
+        canSetOutPoint: bool.isRequired
     };
 
     static defaultProps = {
         frameWidth: 100,
         currentTime: 0,
-        currentPercentage: 0
+        currentPercentage: 0,
+        canSetInPoint: true,
+        canSetOutPoint: true
     };
 
     componentDidMount() {
@@ -110,13 +114,12 @@ export default class Timeline extends Component {
             currentPercentage,
             duration,
             slices,
-            slicingSliceId,
             onResizeSlice,
             onRemoveSlice,
-            onEditSlice
+            onEditSlice,
+            canSetInPoint,
+            canSetOutPoint
         } = this.props;
-
-        const slicing = slicingSliceId !== null;
 
         return (
             <div ref={ref => (this.timeline = ref)} styleName="timeline">
@@ -133,7 +136,8 @@ export default class Timeline extends Component {
                 <Indicator duration={duration}
                            currentTime={currentTime}
                            currentPercentage={currentPercentage}
-                           slicing={slicing}
+                           canSetInPoint={canSetInPoint}
+                           canSetOutPoint={canSetOutPoint}
                            onSetInPoint={this.handleSetInPoint}
                            onSetOutPoint={this.handleSetOutPoint} />
                 <video ref={ref => (this.video = ref)} preload="auto" muted={true} autoPlay={false} style={{display: 'none'}}>

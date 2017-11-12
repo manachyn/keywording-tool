@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server",
-    "build": "webpack"
+    "start": "webpack-dev-server --open --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js"
   },
   "author": "",
   "license": "ISC",
@@ -15,6 +15,7 @@
     "bootstrap": "^3.3.7",
     "classnames": "^2.2.5",
     "fine-uploader": "^5.14.4",
+    "font-awesome": "^4.7.0",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.4",
     "react": "^15.5.3",
@@ -23,9 +24,11 @@
     "react-dimensions": "^1.3.0",
     "react-dom": "^15.5.3",
     "react-fine-uploader": "^1.0.2",
+    "react-fontawesome": "^1.6.1",
     "react-redux": "^5.0.4",
     "react-router-dom": "^4.1.1",
     "react-router-redux": "next",
+    "react-voice-components": "^1.0.0",
     "redux": "^3.6.0",
     "redux-form": "^6.8.0",
     "redux-thunk": "^2.2.0"
@@ -37,6 +40,7 @@
     "babel-preset-es2015": "^6.24.0",
     "babel-preset-react": "^6.23.0",
     "babel-preset-stage-2": "^6.22.0",
+    "clean-webpack-plugin": "^0.1.17",
     "css-loader": "^0.27.3",
     "eslint": "^3.18.0",
     "eslint-config-react-app": "^0.6.2",
@@ -44,13 +48,17 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
+    "extract-text-webpack-plugin": "2.1.2",
     "file-loader": "^0.11.2",
+    "html-webpack-plugin": "^2.30.1",
     "postcss-loader": "^1.3.3",
     "react-hot-loader": "3.0.0-beta.6",
     "style-loader": "^0.16.1",
+    "uglifyjs-webpack-plugin": "^0.4.6",
     "url-loader": "^0.5.9",
     "webpack": "^2.3.2",
-    "webpack-dev-server": "^2.4.2"
+    "webpack-dev-server": "^2.4.2",
+    "webpack-merge": "^4.1.0"
   },
   "eslintConfig": {
     "extends": "react-app"

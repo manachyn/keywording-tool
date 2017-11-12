@@ -71,8 +71,12 @@ export const setInPoint = (offset, videoId) => (dispatch, getState) => {
     if (slices.slicingId !== null) {
         dispatch(finishSlicing());
     } else {
-        const { videos } = getState();
-        const addAction = add(videos.selected, offset);
+        if (!videoId) {
+            const { videos } = getState();
+            videoId = videos.selected;
+        }
+
+        const addAction = add(videoId, offset);
         dispatch(addAction);
         dispatch(startSlicing(addAction.payload.id));
     }

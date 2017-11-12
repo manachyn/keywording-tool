@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import Clearfix from 'react-bootstrap/lib/Clearfix';
 import { renderField } from '../Form/FieldFormControl';
+import Microphone from '../Speech/Microphone';
 import 'bootstrap/dist/css/bootstrap.css';
 
 let VideoMainInfoEditForm = props => {
@@ -31,7 +32,9 @@ let VideoMainInfoEditForm = props => {
                     <Field type="text" name="title" component={renderField} label="Title" />
                 </Col>
                 <Col md={6}>
-                    <Field name="description" component={renderField} componentClass="textarea" label="Description" />
+                    <Field name="description" component={renderField} componentClass="textarea" label="Description"
+                           feedback={ <Microphone /> }
+                    />
                 </Col>
                 <Clearfix />
                 <Col md={6}>

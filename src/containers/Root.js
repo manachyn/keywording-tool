@@ -14,16 +14,19 @@ import Processing from '../pages/Processing';
 
 import Grid from 'react-bootstrap/lib/Grid';
 
+import '../../node_modules/font-awesome/css/font-awesome.css'
+
 const Root = ({ store, history }) => (
     <Provider store={store}>
         <ConnectedRouter history={history}>
             <Grid bsClass="container-fluid">
                 <Navigation/>
                 <FlashMessages/>
-                <Route exact path="/" component={Upload}/>
+                <Route path="/" component={Slicing}/>
+                {/*<Route exact path="/" component={Upload}/>*/}
                 {/*<Route exact path="/" component={Info}/>*/}
                 <Route path="/info" component={Info}/>
-                <Route path="/slicing" component={Slicing}/>
+                {/*<Route path="/slicing" component={Slicing}/>*/}
                 <Route path="/editing" component={Editing}/>
                 <Route path="/processing" component={Processing}/>
             </Grid>

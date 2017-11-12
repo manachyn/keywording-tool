@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {FormGroup, FormControl, ControlLabel, HelpBlock} from 'react-bootstrap';
+import {FormGroup, FormControl, ControlLabel, HelpBlock, Glyphicon} from 'react-bootstrap';
 
 // const renderField = field => (
 //     <div>
@@ -11,14 +11,18 @@ import {FormGroup, FormControl, ControlLabel, HelpBlock} from 'react-bootstrap';
 //     </div>
 // );
 
-export const renderField = ({ input, label, name, placeholder, type, componentClass, help, meta: { touched, error, warning } }) => {
+export const renderField = ({ input, label, name, placeholder, type, componentClass, help, feedback, meta: { touched, error, warning } }) => {
     return (
         <FormGroup>
             <ControlLabel>{label}</ControlLabel>
             <FormControl {...input} componentClass={componentClass} type={type} placeholder={placeholder} />
             {help && <HelpBlock>{help}</HelpBlock>}
             {touched && error && <span className="error-text">{error}</span>}
-            <FormControl.Feedback />
+            {feedback &&
+                <FormControl.Feedback>
+                    {feedback}
+                </FormControl.Feedback>
+            }
         </FormGroup>
     );
 };

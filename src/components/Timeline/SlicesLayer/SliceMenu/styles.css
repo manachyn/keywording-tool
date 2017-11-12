@@ -1,3 +1,9 @@
 .menu {
+    color: #FFF;
+    font-size: 16px;
+    padding: 5px;
+}
 
+.menuItem {
+    cursor: pointer;
 }
