@@ -88,3 +88,11 @@ export const getSelectedVideoId = (state) =>
 
 export const hasSelectedVideo = (state) =>
     state.selected !== null;
+
+export const getPlayFrom = ({ slices }) =>
+    slices.playingId !== null ? slices.byId[slices.playingId].offset : null;
+
+export const getPlayTo = ({ slices }) =>
+    slices.playingId !== null ? slices.byId[slices.playingId].offset + slices.byId[slices.playingId].duration : null;
+
+export const isPlaying = ({ slices, video }) => slices.playingId !== null;

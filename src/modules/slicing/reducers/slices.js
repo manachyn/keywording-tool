@@ -6,6 +6,8 @@ import {
     SLICE_REMOVE,
     SLICE_RESIZE,
     SLICE_SET_FINISH_TIME,
+    SLICE_PLAY,
+    SLICE_STOP,
     SLICING_START,
     SLICING_FINISH
 } from '../constants/actionTypes';
@@ -13,6 +15,10 @@ import {
 import {
     PROCESSING_COMPLETED
 } from '../../processing/constants/actionTypes';
+
+import {
+    VIDEO_TIME_UPDATE
+} from '../../video/constants/actionTypes';
 
 import {
     STATUS_NEW
@@ -84,7 +90,48 @@ const slicingId = (state = initialState.slicingId, action) => {
         case SLICING_FINISH:
             return null;
         case SLICE_REMOVE:
-            return action.payload.id == state ? null : state;
+            return action.payload.id === state ? null : state;
+        default:
+            return state
+    }
+};
+
+const playing = (state = initialState.playing, action) => {
+    switch (action.type) {
+        case SLICE_PLAY: {
+            const { slice } = action.payload;
+            console.log(slice);
+            return {id: slice.id, from: slice.offset, to: slice.offset + slice.duration};
+        }
+        case SLICE_STOP:
+            return initialState.playing;
+        case SLICE_REMOVE:
+            return action.payload.id === state.id ? initialState.playing : state;
+        case VIDEO_TIME_UPDATE: {
+            const { currentTime } = action.payload;
+            if (state.id !== null) {
+                if (currentTime >= state.from && currentTime < state.to) {
+                    return state;
+                } else {
+                    return initialState.playing;
+                }
+            }
+
+            return initialState.playing;
+        }
+        default:
+            return state
+    }
+};
+
+const playingId = (state = initialState.playingId, action) => {
+    switch (action.type) {
+        case SLICE_PLAY:
+            return action.payload.id;
+        case SLICE_STOP:
+            return null;
+        case SLICE_REMOVE:
+            return action.payload.id === state ? null : state;
         default:
             return state
     }
@@ -93,7 +140,8 @@ const slicingId = (state = initialState.slicingId, action) => {
 const slices = combineReducers({
     byId,
     allIds,
-    slicingId
+    slicingId,
+    playingId
 });
 
 export default slices;
@@ -110,3 +158,6 @@ export const getNewSlices = (state, videoId) =>
 
 export const hasSlices = (state, videoId) =>
     getAllSlices(state, videoId).length > 0;
+
+export const getPlayingSlice = (state) =>
+    state.slices.playingId !== null ? state.slices.byId[state.slices.playingId] : null;

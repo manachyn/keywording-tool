@@ -10,10 +10,10 @@ import Microphone from '../Speech/Microphone';
 import 'bootstrap/dist/css/bootstrap.css';
 
 let VideoMainInfoEditForm = props => {
-    const { videoId, onSubmit, handleSubmit, submitting } = props;
+    const { elementId, onSubmit, handleSubmit, submitting, change } = props;
 
     const submit = values => {
-        return onSubmit(videoId, values);
+        return onSubmit(elementId, values);
         // this.props.handleSubmit(data)
         //     .then(() => {
         //         this.setState({saved: true});
@@ -21,6 +21,10 @@ let VideoMainInfoEditForm = props => {
         //             this.setState({saved: false});
         //         }, 5000); // show message for 5 seconds
         //     })
+    };
+
+    const setValue = (field) => (value) => {
+        change(field, value);
     };
 
     return (
@@ -33,7 +37,7 @@ let VideoMainInfoEditForm = props => {
                 </Col>
                 <Col md={6}>
                     <Field name="description" component={renderField} componentClass="textarea" label="Description"
-                           feedback={ <Microphone /> }
+                           feedback={ <Microphone onResult={setValue('description')} /> }
                     />
                 </Col>
                 <Clearfix />

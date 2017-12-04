@@ -22,10 +22,10 @@ const Root = ({ store, history }) => (
             <Grid bsClass="container-fluid">
                 <Navigation/>
                 <FlashMessages/>
-                <Route path="/" component={Slicing}/>
+                <Route exact path="/" component={Slicing}/>
                 {/*<Route exact path="/" component={Upload}/>*/}
                 {/*<Route exact path="/" component={Info}/>*/}
-                <Route path="/info" component={Info}/>
+                <Route exact path="/info" component={Info}/>
                 {/*<Route path="/slicing" component={Slicing}/>*/}
                 <Route path="/editing" component={Editing}/>
                 <Route path="/processing" component={Processing}/>

@@ -1,11 +1,11 @@
-import videos from '../../modules/uploads/reducers/videos';
+import { combineReducers } from 'redux';
+
 import video from '../../modules/video/reducers';
 import slices from '../../modules/slicing/reducers/slices';
 
-const reducers = {
-    videos,
+const rootReducer = combineReducers({
     video,
     slices
-};
+});
 
-export default reducers;
+export default rootReducer;

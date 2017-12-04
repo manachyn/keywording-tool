@@ -53,7 +53,7 @@ class Indicator extends Component {
         return (
             <div styleName="indicator" style={{ left: `${currentPercentage}%` }}>
                 <div styleName="controls" style={{ left: `${controlsLeft}px` }}>
-                    <div styleName="time">{currentTime}</div>
+                    <div styleName="time">{currentTime.toFixed(3)}</div>
                     <div styleName="buttons">
                         {setInPointButton}
                         {setOutPointButton}

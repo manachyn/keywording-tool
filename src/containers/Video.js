@@ -1,35 +1,84 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { loadedMetadata, timeUpdate } from '../modules/video/actions';
 import VideoComponent from '../components/Video';
 import videoShape from '../components/Uploader/Video/shape';
-const { number, func } = PropTypes;
+const { number, func, bool } = PropTypes;
 
-import { getSelectedVideo } from '../modules/uploads/reducers/videos';
+import { getSelectedVideo, getPlayFrom, getPlayTo, isPlaying } from '../modules/uploads/reducers/videos';
+import { stop } from '../modules/slicing/actions';
 
-const Video = ({ video, ...other }) => (
-    <VideoComponent preload="auto" controls {...other}>
-        <source src={video.url} type="video/mp4" />
-    </VideoComponent>
-);
+class Video extends Component {
+    static propTypes = {
+        video: videoShape.isRequired,
+        currentTime: number.isRequired,
+        playing: bool.isRequired,
+        onTimeUpdate: func,
+        onLoadedMetadata: func,
+        playFrom: number,
+        playTo: number,
+    };
 
-Video.propTypes = {
-    video: videoShape.isRequired,
-    currentTime: number,
-    onTimeUpdate: func,
-    onLoadedMetadata: func
-};
+    static defaultProps = {
+        currentTime: 0,
+        playing: false
+    };
 
-Video.defaultProps = {
-    currentTime: 0
-};
+    constructor(props) {
+        super(props);
+        this.api = {
+            play: () => this.video.play(),
+            pause: () => this.video.pause(),
+            seek: (offset) => this.video.seek(offset),
+        };
+    }
+
+    componentDidUpdate() {
+        if (this.props.playing) {
+            this.api.seek(this.props.playFrom);
+            this.api.play();
+        }
+    }
+
+    render() {
+        const { video, ...other } = this.props;
+
+        return (
+            <VideoComponent ref={r => (this.video = r)} preload="auto" controls {...other}>
+                <source src={video.url} type="video/mp4" />
+            </VideoComponent>
+        );
+    }
+}
+
+// const Video = ({ video, ...other }) => (
+//     <VideoComponent preload="auto" controls {...other}>
+//         <source src={video.url} type="video/mp4" />
+//     </VideoComponent>
+// );
+//
+// Video.propTypes = {
+//     video: videoShape.isRequired,
+//     currentTime: number.isRequired,
+//     playing: bool.isRequired,
+//     onTimeUpdate: func,
+//     onLoadedMetadata: func
+// };
+//
+// Video.defaultProps = {
+//     currentTime: 0,
+//     playing: false
+// };
 
 const mapStateToProps = (state) => {
     return {
         video: getSelectedVideo(state.videos),
-        currentTime: state.video.currentTime
+        //currentTime: state.video.currentTime,
+        playing: isPlaying(state),
+        playFrom: getPlayFrom(state),
+        playTo: getPlayTo(state),
     }
 };
 
@@ -40,6 +89,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         onTimeUpdate: (currentTime, duration) => {
             dispatch(timeUpdate(currentTime, duration))
+        },
+        onStopSlice: () => {
+            dispatch(stop())
         }
     }
 };

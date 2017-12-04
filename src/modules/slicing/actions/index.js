@@ -2,6 +2,8 @@ import {
     SLICE_ADD,
     SLICE_REMOVE,
     SLICE_RESIZE,
+    SLICE_PLAY,
+    SLICE_STOP,
     SLICE_SET_FINISH_TIME,
     SLICING_START,
     SLICING_FINISH
@@ -11,13 +13,15 @@ import {
     STATUS_NEW
 } from '../constants/statuses';
 
+import { v4 } from 'node-uuid';
+
 let nextSliceId = 0;
 
 export function add(videoId, offset, duration = 0) {
     return {
         type: SLICE_ADD,
         payload: {
-            id: nextSliceId++,
+            id: v4(),
             offset,
             duration,
             videoId,
@@ -30,6 +34,19 @@ export function remove(id) {
     return {
         type: SLICE_REMOVE,
         payload: { id },
+    };
+}
+
+export function play(id) {
+    return {
+        type: SLICE_PLAY,
+        payload: { id },
+    };
+}
+
+export function stop() {
+    return {
+        type: SLICE_STOP,
     };
 }
 

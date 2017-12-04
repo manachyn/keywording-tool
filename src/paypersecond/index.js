@@ -2,12 +2,16 @@ import React from 'react'
 import { render } from 'react-dom';
 
 import configureStore from './store/configureStore';
-import RootVideo from '../containers/RootVideo';
-import RootTimeline from '../containers/RootTimeline';
+import Video from './containers/Video';
+import Timeline from './containers/Timeline';
 import { getAllSlices } from '../modules/slicing/reducers/slices';
 
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/es/integration/react';
+
 let store;
-const videoId = 1;
+let persistor;
+const videoId = 0;
 
 function selectSlices(state) {
     return state.slices.byId;
@@ -24,14 +28,25 @@ const handleChange = callback => () => {
 };
 
 export const init = ({ video, onStateChange }) => {
-    store = configureStore({ video: { url: video }});
+    ({store, persistor} = configureStore({
+        videos: {
+            byId: {
+                [video.id]: {
+                    id: video.id,
+                    url: video.url
+                }
+            },
+            allIds: [video.id],
+            selected: video.id
+        }
+    }));
     store.subscribe(handleChange(onStateChange));
 };
 
 export const renderPlayer = (selector) => {
-    render(<RootVideo store={store} />, document.getElementById(selector));
+    render(<Provider store={store}><PersistGate persistor={persistor}><Video/></PersistGate></Provider>, document.getElementById(selector));
 };
 
 export const renderTimeline = (selector) => {
-    render(<RootTimeline store={store} />, document.getElementById(selector));
+    render(<Provider store={store}><PersistGate persistor={persistor}><Timeline/></PersistGate></Provider>, document.getElementById(selector));
 };

@@ -1,7 +1,13 @@
 export default {
     byId: {},
     allIds: [],
-    slicingId: null
+    slicingId: null,
+    playingId: null,
+    playing: {
+        id : null,
+        from: null,
+        to: null
+    }
 };
 // export default {
 //     byId: {

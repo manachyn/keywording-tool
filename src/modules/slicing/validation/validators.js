@@ -1,9 +1,9 @@
-export const validateSliceStartOffset = (offset, slices) => {
+export const validateSliceStartOffset = (videoId, offset, slices) => {
     let valid = true;
     let slice;
     for (let id of slices.allIds) {
         slice = slices.byId[id];
-        if (offset >= slice.offset && offset < slice.offset + slice.duration) {
+        if (videoId === slice.videoId && offset >= slice.offset && offset < slice.offset + slice.duration) {
             valid = false;
             break;
         }
@@ -19,7 +19,7 @@ export const validateSliceFinishOffset = (offset, sliceId, slices) => {
 
     for (let id of slices.allIds) {
         slice2 = slices.byId[id];
-        if (id !== sliceId && Math.max(slice1.offset, slice2.offset) <= Math.min(offset, slice2.offset + slice2.duration)) {
+        if (slice1.videoId === slice2.videoId && id !== sliceId && Math.max(slice1.offset, slice2.offset) <= Math.min(offset, slice2.offset + slice2.duration)) {
             valid = false;
             break;
         }

@@ -9,10 +9,10 @@ import { renderField } from '../Form/FieldFormControl';
 import 'bootstrap/dist/css/bootstrap.css';
 
 let VideoAttributesEditForm = props => {
-    const { videoId, onSubmit, handleSubmit, submitting } = props;
+    const { elementId, onSubmit, handleSubmit, submitting } = props;
 
     const submit = values => {
-        return onSubmit(videoId, values);
+        return onSubmit(elementId, values);
     };
 
     return (

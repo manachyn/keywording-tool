@@ -20,9 +20,12 @@ function ElementsLayer(LayerElementComponent) {
             containerHeight: number.isRequired,
             elementX: func.isRequired,
             elementWidth: func.isRequired,
-            onResizeElement: func.isRequired,
-            onRemoveElement: func.isRequired,
+            onResizeElement: func,
+            onRemoveElement: func,
+            onPlayElement: func,
+            onStopElement: func,
             onEditElement: func,
+            playingElementId: number
         };
 
         constructor(props) {
@@ -80,11 +83,13 @@ function ElementsLayer(LayerElementComponent) {
             const element = elements.find(item => item.id === id);
             const offsetDelta = x * duration / containerWidth - element.offset;
             const durationDelta = width * duration / containerWidth - element.duration;
-            this.props.onResizeElement(id, offsetDelta, durationDelta, factor);
+            if (this.props.onResizeElement) {
+                this.props.onResizeElement(id, offsetDelta, durationDelta, factor);
+            }
         }
 
         renderElement(element) {
-            const { containerWidth, elementX, elementWidth, onRemoveElement, onEditElement } = this.props;
+            const { containerWidth, elementX, elementWidth, onRemoveElement, onPlayElement, onStopElement, onEditElement, playingElementId } = this.props;
             const { id } = element;
 
             // const x = containerWidth * element.offset / duration;
@@ -98,7 +103,7 @@ function ElementsLayer(LayerElementComponent) {
 
             return (
                 <ResizableLayerItem key={element.id} { ...itemProps } onResize={this.resizeElement} validateResize={this.validateResize}>
-                    <LayerElementComponent { ...element } onRemove={onRemoveElement} onEdit={onEditElement} />
+                    <LayerElementComponent { ...element } onRemove={onRemoveElement} onPlay={playingElementId === null || playingElementId !== element.id ? onPlayElement : null} onStop={playingElementId !== null && playingElementId === element.id ? onStopElement : null} onEdit={onEditElement} />
                 </ResizableLayerItem>
             );
         }

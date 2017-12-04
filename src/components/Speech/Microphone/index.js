@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { VoiceRecognition } from 'react-voice-components';
 import StartButton from './StartButton';
 import StopButton from './StopButton';
 
 import './styles.css';
+
+const { func } = PropTypes;
 
 class Microphone extends Component {
     state = {
@@ -11,16 +14,18 @@ class Microphone extends Component {
         stop: false
     };
 
+    static propTypes = {
+        onResult: func.isRequired
+    };
+
     onEnd = () => {
         this.setState({ start: false, stop: false });
-        this.props.action('end')()
+        //this.props.action('end')()
     };
 
     onResult = ({ finalTranscript }) => {
-        const result = finalTranscript;
-
-        this.setState({ start: false });
-        this.props.action('result')(finalTranscript)
+        //this.setState({ start: false });
+        this.props.onResult(finalTranscript);
     };
 
     handleStart = () => {
@@ -34,7 +39,6 @@ class Microphone extends Component {
     render () {
         const { className } = this.props;
         let button = null;
-        console.log(this.state);
         if (this.state.start) {
             button = <StopButton onClick={this.handleStop} />;
         } else {

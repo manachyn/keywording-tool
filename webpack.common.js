@@ -5,8 +5,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     entry: {
-        catalogingTool: './index.js',
-        payPerSecond: './paypersecond/index.js'
+        //catalogingTool: ['babel-polyfill', './index.js'],
+        payPerSecond: ['babel-polyfill', './paypersecond/index.js']
     },
     output: {
         filename: '[name].bundle.js',
