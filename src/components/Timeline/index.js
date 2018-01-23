@@ -22,7 +22,7 @@ export default class Timeline extends Component {
         currentPercentage: number,
         duration: number.isRequired,
         slices: arrayOf(sliceShape),
-        slicingSliceId: number,
+        slicingSliceId: string,
         playingSliceId: number,
         onResizeSlice: func,
         onRemoveSlice: func,

@@ -1,3 +1,9 @@
+@import "../../variables.css";
+
+:root {
+    --indicator-background: color(var(--brand-primary));
+}
+
 .indicator {
     position: absolute;
     top: 0;
@@ -5,7 +11,7 @@
     z-index: 400;
     width: 2px;
     height: 100%;
-    background: #0066CB;
+    background-color: var(--indicator-background);
     /*transition: all 0.5s ease-in-out;*/
     /*transition:left 1s linear;*/
 }
@@ -16,7 +22,9 @@
     left: 0px;
     width: 100px;
     height: 50px;
-    background: #0066CB;
+    background-color: var(--indicator-background);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 .buttons {

@@ -1,0 +1,17 @@
+.control {
+  outline: none;
+  position: relative;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 4em;
+}
+
+.progressControl {
+  composes: control;
+  display: flex;
+  flex: auto;
+  align-items: center;
+  min-width: 4em;
+}

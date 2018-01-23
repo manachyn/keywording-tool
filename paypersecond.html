@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Pay per second</title>
     <link href="payPerSecond.css" rel="stylesheet">
+    <link rel="stylesheet" href="dist/payPerSecond.css">
 </head>
 <body>
     <div>Price: <span id="price">0</span></div>
@@ -19,14 +20,14 @@
         const priceElement = document.getElementById('price');
         document.addEventListener('DOMContentLoaded', function() {
             function calculatePrice(slices) {
-                var totalDuration = 0;
+                let totalDuration = 0;
                 slices.forEach(function(slice) {
                     totalDuration += slice.duration;
                 });
                 priceElement.innerHTML = Math.round(pricePerSecond * totalDuration * 100) / 100;
             }
-            payPerSecond.init({ video: {id: 2, url: 'http://vjs.zencdn.net/v/oceans.mp4'}, onStateChange: calculatePrice });
-            payPerSecond.renderPlayer('player');
+            payPerSecond.init({ video: {id: 1, url: 'http://vjs.zencdn.net/v/oceans.mp4'}, onStateChange: calculatePrice });
+            payPerSecond.renderPlayer('player', {player: {width: 960}});
             payPerSecond.renderTimeline('timeline');
         });
     </script>

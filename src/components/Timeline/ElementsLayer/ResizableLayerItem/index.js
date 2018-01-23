@@ -6,11 +6,11 @@ import Handle from './Handle';
 
 import './styles.css';
 
-const { number, func, node } = PropTypes;
+const { string, number, func, node } = PropTypes;
 
 export default class ResizableLayerItem extends Component {
     static propTypes = {
-        id: number.isRequired,
+        id: string.isRequired,
         x: number.isRequired,
         width: number.isRequired,
         onResize: func.isRequired,

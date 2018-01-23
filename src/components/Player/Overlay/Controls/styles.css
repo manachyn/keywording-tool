@@ -1,0 +1,32 @@
+@import "../../../variables.css";
+
+:root {
+    --toggle-play-button-color: var(--brand-light);
+    --toggle-play-button-hover-color: color(var(--toggle-play-button-color) a(60%));
+}
+
+.controls {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+    font-size: 30px;
+}
+
+.button {
+    box-shadow: none;
+    background-color: transparent;
+
+&:hover {
+     background-color: transparent;
+ }
+}
+
+.togglePlayButton {
+    composes: button;
+    color: var(--toggle-play-button-color);
+
+&:hover {
+     color: var(--toggle-play-button-hover-color);
+ }
+}

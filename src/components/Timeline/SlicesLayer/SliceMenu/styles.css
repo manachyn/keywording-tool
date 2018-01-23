@@ -1,3 +1,9 @@
+@import "../../../variables.css";
+
+:root {
+    --menu-item-background: color(var(--brand-primary));
+}
+
 .menu {
     color: #FFF;
     font-size: 16px;
@@ -6,4 +12,9 @@
 
 .menuItem {
     cursor: pointer;
+    padding: 4px;
+    margin-bottom: 3px;
+    background-color: var(--menu-item-background);
+    border-radius: 3px;
+    font-size: 14px;
 }

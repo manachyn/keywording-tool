@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import reducers from '../reducers';
 
 import { persistStore, persistCombineReducers } from 'redux-persist'
-import storage from 'redux-persist/es/storage'
+import session from 'redux-persist/lib/storage/session'
 
 const composeEnhancers =
     typeof window === 'object' &&
@@ -14,7 +14,7 @@ const composeEnhancers =
 
 const config = {
     key: 'root',
-    storage,
+    storage: session,
     whitelist: ['slices']
 };
 

@@ -11,7 +11,7 @@ import { PersistGate } from 'redux-persist/es/integration/react';
 
 let store;
 let persistor;
-const videoId = 0;
+let videoId = 0;
 
 function selectSlices(state) {
     return state.slices.byId;
@@ -40,6 +40,7 @@ export const init = ({ video, onStateChange }) => {
             selected: video.id
         }
     }));
+    videoId = video.id;
     store.subscribe(handleChange(onStateChange));
 };
 

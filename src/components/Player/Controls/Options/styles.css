@@ -1,0 +1,29 @@
+@import "../../../variables.css";
+
+:root {
+  --button-on-text-color: var(--brand-light);
+  --button-off-text-color: #000;
+}
+
+.options {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.button {
+}
+
+.buttonOn {
+  composes: button;
+  color: var(--button-on-text-color);
+}
+
+.buttonOff {
+  composes: button;
+  color: var(--button-off-text-color);
+}
+
+.buttonFullScreen {
+  composes: button;
+}

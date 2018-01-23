@@ -4,11 +4,11 @@ import './styles.css';
 
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 
-const { number, func } = PropTypes;
+const { string, func } = PropTypes;
 
 export default class SliceMenu extends Component {
     static propTypes = {
-        id: number.isRequired,
+        id: string.isRequired,
         onRemove: func,
         onEdit: func,
         onPlay: func,

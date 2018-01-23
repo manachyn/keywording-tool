@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 
-const { number } = PropTypes;
+const { string, number } = PropTypes;
 
 export default {
-    id: number.isRequired,
+    id: string.isRequired,
     x: number.isRequired,
     width: number.isRequired
 };

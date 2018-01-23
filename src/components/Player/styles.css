@@ -1,0 +1,7 @@
+.player {
+  position: relative;
+}
+
+.player video {
+  vertical-align: bottom;
+}

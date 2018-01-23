@@ -91,6 +91,33 @@ export default class Video extends Component {
         // if (this.props.onPause) this.props.onPause();
     }
 
+    // API
+
+    toggleMute() {
+        this.video.muted = !this.video.muted;
+    }
+
+    toggleLoop() {
+        this.video.loop = !this.video.loop;
+    }
+
+    togglePlay() {
+        console.log('togglePlay');
+        if (this.props.paused) {
+            this.video.play();
+        } else {
+            this.video.pause();
+        }
+    }
+
+    toggleFullScreen() {
+        if (this.video.requestFullscreen) {
+            this.video.requestFullscreen();
+        } else if (this.video.webkitRequestFullscreen) {
+            this.video.webkitRequestFullscreen();
+        }
+    }
+
     play = () => {
         this.video.play();
     };
