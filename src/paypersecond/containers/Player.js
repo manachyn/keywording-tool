@@ -9,6 +9,8 @@ const { number, func, bool, string, object } = PropTypes;
 
 import { getSelectedVideo, getPlayFrom, getPlayTo, isPlaying } from '../../modules/uploads/reducers/videos';
 import { stop } from '../../modules/slicing/actions';
+import pick from 'lodash/pick';
+import { videoOwnProps } from '../../components/Video';
 
 class Player extends Component {
     static propTypes = {
@@ -16,6 +18,7 @@ class Player extends Component {
         currentTime: number.isRequired,
         playing: bool.isRequired,
         onTimeUpdate: func,
+        onStopSlice: func,
         onLoadedMetadata: func,
         playFrom: number,
         playTo: number,
@@ -61,10 +64,29 @@ class Player extends Component {
     }
 
     renderVideo(size) {
-        const { selectedVideo, ...video } = this.props;
+        const {
+            selectedVideo,
+            onTimeUpdate,
+            onStopSlice,
+            onLoadedMetadata,
+            playFrom,
+            playTo,
+            ...other
+        } = this.props;
+
+        const videoProps = {
+            selectedVideo,
+            onTimeUpdate,
+            onStopSlice,
+            onLoadedMetadata,
+            playFrom,
+            playTo
+        }
+
+        const videoElProps = pick(other, Object.keys(videoOwnProps));
 
         return (
-            <VideoComponent ref={r => (this.video = r)} { ...{ ...size, ...video } }>
+            <VideoComponent ref={r => (this.video = r)} { ...{ ...size, ...videoProps, ...videoElProps } }>
                 <source src={selectedVideo.url} type="video/mp4" />
             </VideoComponent>
         );

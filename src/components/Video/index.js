@@ -4,6 +4,8 @@ import pick from 'lodash/pick';
 
 const { string, bool, number, node, func } = PropTypes;
 
+import { shallowEqual } from '../../utils/compare'
+
 const videoOwnProps = {
     preload: string,
     autoPlay: bool,
@@ -27,6 +29,8 @@ export default class Video extends Component {
         onLoadedMetadata: func,
         onPlay: func,
         onPause: func,
+        playFrom: number,
+        playTo: number,
     };
 
     static defaultProps = {
@@ -41,12 +45,9 @@ export default class Video extends Component {
         this.handleTimeUpdate = this.handleTimeUpdate.bind(this);
     }
 
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     console.log(nextProps, nextState);
-    //     console.log(this.props, this.state);
-    //
-    //     return false;
-    // }
+    shouldComponentUpdate(nextProps, nextState) {
+        return !shallowEqual(this.props, nextProps, ['children']);
+    }
 
     componentDidMount() {
         this.video.addEventListener('loadedmetadata', this.handleLoadedMetadata);
@@ -142,7 +143,7 @@ export default class Video extends Component {
     render() {
         const { children, ...other } = this.props;
         const ownProps = pick(other, Object.keys(videoOwnProps));
-
+        console.log('Video');
         return (
             <video ref={ref => (this.video = ref)} {...ownProps}>
                 {children}
@@ -150,3 +151,5 @@ export default class Video extends Component {
         );
     }
 }
+
+export { videoOwnProps };
