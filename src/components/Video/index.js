@@ -143,7 +143,7 @@ export default class Video extends Component {
     render() {
         const { children, ...other } = this.props;
         const ownProps = pick(other, Object.keys(videoOwnProps));
-        console.log('Video');
+        
         return (
             <video ref={ref => (this.video = ref)} {...ownProps}>
                 {children}

@@ -26,7 +26,7 @@
                 });
                 priceElement.innerHTML = Math.round(pricePerSecond * totalDuration * 100) / 100;
             }
-            payPerSecond.init({ video: {id: 1, url: 'http://vjs.zencdn.net/v/oceans.mp4'}, onStateChange: calculatePrice });
+            payPerSecond.init({ video: {id: 1, url: 'TFR-AZALIA-3-2.mp4', type: 'video/mp4', thumb: {url: 'TFR-AZALIA-3-2-thumb.mp4', type: 'video/mp4'}}, onStateChange: calculatePrice });
             payPerSecond.renderPlayer('player', {player: {width: 960}});
             payPerSecond.renderTimeline('timeline');
         });

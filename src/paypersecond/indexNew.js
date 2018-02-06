@@ -33,7 +33,12 @@ export const init = ({ video, onStateChange }) => {
             byId: {
                 [video.id]: {
                     id: video.id,
-                    url: video.url
+                    url: video.url,
+                    type: video.type,
+                    thumb: {
+                        url: video.thumb.url,
+                        type: video.thumb.type
+                    }
                 }
             },
             allIds: [video.id],

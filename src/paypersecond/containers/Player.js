@@ -87,7 +87,7 @@ class Player extends Component {
 
         return (
             <VideoComponent ref={r => (this.video = r)} { ...{ ...size, ...videoProps, ...videoElProps } }>
-                <source src={selectedVideo.url} type="video/mp4" />
+                <source src={selectedVideo.url} type={selectedVideo.type} />
             </VideoComponent>
         );
     }

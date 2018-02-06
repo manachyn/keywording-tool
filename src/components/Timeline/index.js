@@ -127,6 +127,9 @@ export default class Timeline extends Component {
             playingSliceId
         } = this.props;
 
+        const videoUrl = this.props.video.thumb.url || this.props.video.url;
+        const videoType = this.props.video.thumb.type || this.props.video.type;
+
         return (
             <div ref={ref => (this.timeline = ref)} styleName="timeline">
                 <canvas ref={ref => (this.canvas = ref)} />
@@ -150,7 +153,7 @@ export default class Timeline extends Component {
                            onSetInPoint={this.handleSetInPoint}
                            onSetOutPoint={this.handleSetOutPoint} />
                 <video ref={ref => (this.video = ref)} preload="auto" muted={true} autoPlay={false} style={{display: 'none'}}>
-                    <source src={this.props.video.url} />
+                    <source src={videoUrl} type={videoType} />
                 </video>
             </div>
         );
