@@ -7,6 +7,7 @@ import ResizableLayerItem from './ResizableLayerItem';
 import './styles.css';
 
 import elementShape from '../Element/shape';
+import { shallowEqual } from '../../../utils/compare';
 
 const { arrayOf, number, func } = PropTypes;
 
@@ -15,7 +16,7 @@ function ElementsLayer(LayerElementComponent) {
         static propTypes = {
             elements: arrayOf(elementShape).isRequired,
             duration: number,
-            currentTime: number,
+            // currentTime: number,
             containerWidth: number.isRequired,
             containerHeight: number.isRequired,
             elementX: func.isRequired,
@@ -33,6 +34,10 @@ function ElementsLayer(LayerElementComponent) {
             this.resizeElement = this.resizeElement.bind(this);
             this.renderElement = this.renderElement.bind(this);
             this.validateResize = this.validateResize.bind(this);
+        }
+
+        shouldComponentUpdate(nextProps, nextState) {
+            return !shallowEqual(this.props, nextProps);
         }
 
         validateResize(id, x, width, factor) {
@@ -110,6 +115,7 @@ function ElementsLayer(LayerElementComponent) {
 
         render() {
             const {elements} = this.props;
+            console.log('Slices')
 
             return <div styleName="elements">{elements.map(this.renderElement)}</div>;
         }

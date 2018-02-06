@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { getSelectedVideo, getSelectedVideoId } from '../../modules/uploads/reducers/videos';
+import { getSlicesOfSelectedVideo } from '../../selectors';
 import { setInPoint, setOutPoint, remove, resize, play, stop } from '../../modules/slicing/actions';
 import { getAllSlices } from '../../modules/slicing/reducers/slices';
 import { validateSliceStartOffset, validateSliceFinishOffset } from '../../modules/slicing/validation/validators';
@@ -18,7 +19,8 @@ const mapStateToProps = (state) => {
         currentTime: state.video.currentTime,
         currentPercentage: state.video.currentPercentage,
         duration: state.video.duration,
-        slices: getAllSlices(state.slices, selectedVideoId),
+        //slices: getAllSlices(state.slices, selectedVideoId),
+        slices: getSlicesOfSelectedVideo(state),
         slicingSliceId: state.slices.slicingId,
         playingSliceId: state.slices.playingId,
         canSetInPoint: state.slices.slicingId === null && validateSliceStartOffset(selectedVideoId, state.video.currentTime, state.slices),

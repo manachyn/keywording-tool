@@ -135,7 +135,7 @@ export default class Timeline extends Component {
                 <canvas ref={ref => (this.canvas = ref)} />
                 <SlicesLayer elements={slices}
                              duration={duration}
-                             currentTime={currentTime}
+                            //  currentTime={currentTime}
                              elementX={this.getElementX}
                              elementWidth={this.getElementWidth}
                              onResizeElement={onResizeSlice}
