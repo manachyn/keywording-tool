@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { getSelectedVideo, getSelectedVideoId } from '../../modules/uploads/reducers/videos';
 import { getSlicesOfSelectedVideo } from '../../selectors';
 import { setInPoint, setOutPoint, remove, resize, play, stop } from '../../modules/slicing/actions';
+import { seek } from '../../modules/video/actions';
 import { getAllSlices } from '../../modules/slicing/reducers/slices';
 import { validateSliceStartOffset, validateSliceFinishOffset } from '../../modules/slicing/validation/validators';
 import Timeline from '../../components/Timeline';
@@ -19,6 +20,7 @@ const mapStateToProps = (state) => {
         currentTime: state.video.currentTime,
         currentPercentage: state.video.currentPercentage,
         duration: state.video.duration,
+        startTimecode: state.video.startTimecode,
         //slices: getAllSlices(state.slices, selectedVideoId),
         slices: getSlicesOfSelectedVideo(state),
         slicingSliceId: state.slices.slicingId,
@@ -47,6 +49,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         onSetOutPoint: (currentTime) => {
             dispatch(setOutPoint(currentTime))
+        },
+        onSetCurrentTime: (currentTime, duration) => {
+            dispatch(seek(currentTime))
         },
     }
 };

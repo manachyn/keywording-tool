@@ -100,7 +100,6 @@ const playing = (state = initialState.playing, action) => {
     switch (action.type) {
         case SLICE_PLAY: {
             const { slice } = action.payload;
-            console.log(slice);
             return {id: slice.id, from: slice.offset, to: slice.offset + slice.duration};
         }
         case SLICE_STOP:

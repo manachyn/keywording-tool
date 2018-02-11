@@ -38,7 +38,8 @@ export const init = ({ video, onStateChange }) => {
                     thumb: {
                         url: video.thumb.url,
                         type: video.thumb.type
-                    }
+                    },
+                    startTimecode: video.startTimecode ? video.startTimecode : null
                 }
             },
             allIds: [video.id],

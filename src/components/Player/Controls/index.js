@@ -6,7 +6,7 @@ import SeekBar from './../SeekBar';
 import './styles.css';
 
 import { percentageShape } from '../../propTypes';
-import formatTime from '../../../utils/time';
+import { formatTime } from '../../../utils/time';
 
 const { bool, number, func } = PropTypes;
 

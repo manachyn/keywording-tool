@@ -5,7 +5,8 @@
 //                 id: 0,
 //                 name: 'oceans.mp4',
 //                 uuid: 'sdasdasd',
-//                 url: 'http://vjs.zencdn.net/v/oceans.mp4'
+//                 url: 'http://vjs.zencdn.net/v/oceans.mp4',
+//                 startTimecode: null
 //             }
 //         },
 //         allIds: [0],

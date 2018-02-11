@@ -40,13 +40,17 @@ export default class SliceMenu extends Component {
 
         return (
             <div styleName="menu">
-                {onEdit && <Glyphicon styleName="menuItem" glyph="pencil" onClick={this.handleEdit} />}
-                {onEdit && <br/>}
-                {onPlay && <Glyphicon styleName="menuItem" glyph="play" onClick={this.handlePlay} />}
-                {onPlay && <br/>}
-                {onStop && <Glyphicon styleName="menuItem" glyph="stop" onClick={this.handleStop} />}
-                {onStop && <br/>}
-                {onRemove && <br/> && <Glyphicon styleName="menuItem" glyph="trash" onClick={this.handleRemove} />}
+                <div styleName="top">
+                    {onEdit && <Glyphicon styleName="menuItem" glyph="pencil" onClick={this.handleEdit} />}
+                    {onEdit && <br/>}
+                    {onPlay && <Glyphicon title="Play this slice" styleName="menuItem" glyph="play" onClick={this.handlePlay} />}
+                    {onPlay && <br/>}
+                    {onStop && <Glyphicon styleName="menuItem" glyph="stop" onClick={this.handleStop} />}
+                    {onStop && <br/>}
+                </div>
+                <div styleName="bottom">
+                    {onRemove && <br/> && <Glyphicon title="Delete this slice" styleName="menuItem" glyph="trash" onClick={this.handleRemove} />}
+                </div>
             </div>
         );
     }

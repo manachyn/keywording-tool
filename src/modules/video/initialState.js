@@ -8,6 +8,7 @@ export default {
     duration: 0,
     currentTime: 0,
     currentPercentage: 0,
+    seekTo: null,
 
     percentage: {
         buffered: 0,

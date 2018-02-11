@@ -23,7 +23,7 @@ export default class Timeline extends Component {
         duration: number.isRequired,
         slices: arrayOf(sliceShape),
         slicingSliceId: string,
-        playingSliceId: number,
+        playingSliceId: string,
         onResizeSlice: func,
         onRemoveSlice: func,
         onPlaySlice: func,
@@ -32,7 +32,8 @@ export default class Timeline extends Component {
         onSetInPoint: func,
         onSetOutPoint: func,
         canSetInPoint: bool.isRequired,
-        canSetOutPoint: bool.isRequired
+        canSetOutPoint: bool.isRequired,
+        onSetCurrentTime: func.isRequired
     };
 
     static defaultProps = {
@@ -117,6 +118,7 @@ export default class Timeline extends Component {
             currentPercentage,
             duration,
             slices,
+            onSetCurrentTime,
             onResizeSlice,
             onRemoveSlice,
             onPlaySlice,
@@ -148,8 +150,10 @@ export default class Timeline extends Component {
                 <Indicator duration={duration}
                            currentTime={currentTime}
                            currentPercentage={currentPercentage}
+                           startTimecode={this.props.video.startTimecode}
                            canSetInPoint={canSetInPoint}
                            canSetOutPoint={canSetOutPoint}
+                           onSetCurrentTime={onSetCurrentTime}
                            onSetInPoint={this.handleSetInPoint}
                            onSetOutPoint={this.handleSetOutPoint} />
                 <video ref={ref => (this.video = ref)} preload="auto" muted={true} autoPlay={false} style={{display: 'none'}}>

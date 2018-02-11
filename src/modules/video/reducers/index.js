@@ -1,4 +1,4 @@
-import { VIDEO_LOADED_METADATA, VIDEO_TIME_UPDATE } from '../constants/actionTypes';
+import { VIDEO_LOADED_METADATA, VIDEO_TIME_UPDATE, VIDEO_SEEK, VIDEO_SEEKED } from '../constants/actionTypes';
 import { VIDEO_SELECT } from '../../uploads/constants/actionTypes';
 
 import initialState from '../initialState';
@@ -32,6 +32,18 @@ export default function video(state = initialState, action) {
                 currentTime: 0,
                 currentPercentage: 0,
                 duration: 0
+            };
+        }
+        case VIDEO_SEEK: {
+            return {
+                ...state,
+                seekTo: action.payload.time
+            };
+        }
+        case VIDEO_SEEKED: {
+            return {
+                ...state,
+                seekTo: null
             };
         }
         default:

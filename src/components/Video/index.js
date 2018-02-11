@@ -4,7 +4,7 @@ import pick from 'lodash/pick';
 
 const { string, bool, number, node, func } = PropTypes;
 
-import { shallowEqual } from '../../utils/compare'
+import { shallowEqual } from '../../utils/compare';
 
 const videoOwnProps = {
     preload: string,

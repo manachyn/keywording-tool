@@ -1,0 +1,15 @@
+@import "../variables.css";
+
+:root {
+    --indicator-background: color(var(--brand-primary));
+}
+
+.input {
+    width: 90%;
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    text-align: center
+}
+

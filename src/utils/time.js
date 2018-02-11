@@ -1,4 +1,6 @@
-function formatTime(seconds, guide = seconds) {
+const timeRegexp = /^((0[0-9]|[1-9][0-9]*):)?([0-9]|[0-5][0-9]):([0-5][0-9])$/;
+
+export function formatTime(seconds, guide = seconds) {
     seconds = seconds < 0 ? 0 : seconds;
     let s = Math.floor(seconds % 60);
     let m = Math.floor(seconds / 60 % 60);
@@ -26,4 +28,16 @@ function formatTime(seconds, guide = seconds) {
     return h + m + s;
 }
 
-export default formatTime;
+export function isValidTime(time) {
+    return timeRegexp.test(time);
+}
+
+export function timeToSeconds(timeString) {
+    const timeArray = timeString.split(":");
+    timeArray.reverse();
+    const hours = timeArray[2] ? parseInt(timeArray[2]) * 60 * 60 : 0;
+    const minutes = timeArray[1] ? parseInt(timeArray[1]) * 60 : 0;
+    const seconds = timeArray[0] ? parseInt(timeArray[0]) : 0;
+
+    return hours + minutes + seconds;
+}

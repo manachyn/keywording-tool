@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { loadedMetadata, timeUpdate } from '../../modules/video/actions';
+import { loadedMetadata, timeUpdate, seek, seeked } from '../../modules/video/actions';
 import VideoComponent from '../../components/Video';
 import PlayerComponent from '../../components/Player';
 const { number, func, bool, string, object } = PropTypes;
@@ -22,6 +22,7 @@ class Player extends Component {
         onLoadedMetadata: func,
         playFrom: number,
         playTo: number,
+        onSeeked: func,
     };
 
     static defaultProps = {
@@ -56,10 +57,14 @@ class Player extends Component {
         };
     }
 
-    componentDidUpdate() {
-        if (this.props.playing) {
+    componentDidUpdate(prevProps) {
+        if (prevProps.playing !== this.props.playing && this.props.playing) {
             this.api.seek(this.props.playFrom);
             this.api.play();
+        }
+        if (prevProps.video.seekTo !== this.props.video.seekTo && this.props.video.seekTo) {
+            this.api.seek(this.props.video.seekTo);
+            this.props.onSeeked(this.props.video.seekTo)
         }
     }
 
@@ -83,7 +88,7 @@ class Player extends Component {
             playTo
         }
 
-        const videoElProps = pick(other, Object.keys(videoOwnProps));
+        const videoElProps = pick(other.video, Object.keys(videoOwnProps));
 
         return (
             <VideoComponent ref={r => (this.video = r)} { ...{ ...size, ...videoProps, ...videoElProps } }>
@@ -131,7 +136,7 @@ const mapStateToProps = (state) => {
         video: state.video,
         playing: isPlaying(state),
         playFrom: getPlayFrom(state),
-        playTo: getPlayTo(state),
+        playTo: getPlayTo(state)
     }
 };
 
@@ -145,6 +150,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         onStopSlice: () => {
             dispatch(stop())
+        },
+        onSeeked: () => {
+            dispatch(seeked())
         }
     }
 };

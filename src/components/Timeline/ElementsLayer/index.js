@@ -9,7 +9,7 @@ import './styles.css';
 import elementShape from '../Element/shape';
 import { shallowEqual } from '../../../utils/compare';
 
-const { arrayOf, number, func } = PropTypes;
+const { arrayOf, number, func, string } = PropTypes;
 
 function ElementsLayer(LayerElementComponent) {
     class Layer extends Component {
@@ -26,7 +26,7 @@ function ElementsLayer(LayerElementComponent) {
             onPlayElement: func,
             onStopElement: func,
             onEditElement: func,
-            playingElementId: number
+            playingElementId: string
         };
 
         constructor(props) {
