@@ -45,16 +45,18 @@ export default class Timeline extends Component {
     };
 
     componentDidMount() {
-        this.video.addEventListener('loadedmetadata', this.handleLoadedMetadata);
+        //this.video.addEventListener('loadedmetadata', this.handleLoadedMetadata);
+        this.video.addEventListener('loadeddata', this.handleLoadedData);
         this.video.addEventListener('seeked', this.handleSeeked);
     }
 
     componentWillUnmount() {
-        this.video.removeEventListener('loadedmetadata', this.handleLoadedMetadata);
+        //this.video.removeEventListener('loadedmetadata', this.handleLoadedMetadata);
+        this.video.removeEventListener('loadeddata', this.handleLoadedData);
         this.video.removeEventListener('seeked', this.handleSeeked);
     }
 
-    handleLoadedMetadata = () => {
+    handleLoadedMetadata = (e) => {
         const width = this.timeline.offsetWidth;
         this.frameWidth = this.props.frameWidth;
         //this.frameHeight = this.video.videoHeight * this.frameWidth / this.video.videoWidth;
@@ -67,6 +69,20 @@ export default class Timeline extends Component {
         this.currentFrame = 0;
         this.video.currentTime = this.currentFrame * this.frameDuration;
     };
+
+    handleLoadedData = (e) => {
+        const width = this.timeline.offsetWidth;
+        this.frameWidth = this.props.frameWidth;
+        //this.frameHeight = this.video.videoHeight * this.frameWidth / this.video.videoWidth;
+        this.frameHeight = 100;
+        this.canvas.width = width;
+        this.canvas.height = this.frameHeight;
+        this.totalFrames = width / this.props.frameWidth;
+        const videoDuration = this.video.duration;
+        this.frameDuration = videoDuration / this.totalFrames;
+        this.currentFrame = 0;
+        this.video.currentTime = this.currentFrame * this.frameDuration;
+    }
 
     handleSeeked = () => {
         const ctx = this.canvas.getContext('2d');

@@ -91,7 +91,7 @@ class Player extends Component {
         const videoElProps = pick(other.video, Object.keys(videoOwnProps));
 
         return (
-            <VideoComponent ref={r => (this.video = r)} { ...{ ...size, ...videoProps, ...videoElProps } }>
+            <VideoComponent ref={r => (this.video = r)} { ...{ ...size, ...videoProps, ...videoElProps } } preload="auto">
                 <source src={selectedVideo.url} type={selectedVideo.type} />
             </VideoComponent>
         );
