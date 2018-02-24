@@ -1,9 +1,6 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import reducers from '../reducers';
-
-import { persistStore, persistCombineReducers } from 'redux-persist'
-import session from 'redux-persist/lib/storage/session'
 
 const composeEnhancers =
     typeof window === 'object' &&
@@ -12,28 +9,17 @@ const composeEnhancers =
             // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
         }) : compose;
 
-const config = {
-    key: 'root',
-    storage: session,
-    whitelist: ['slices']
-};
-
-const reducer = persistCombineReducers(config, reducers);
-
 const enhancer = composeEnhancers(
     applyMiddleware(thunk)
 );
 
-const configureStore = preloadedState => {
-    let store = createStore(
-        reducer,
-        preloadedState,
-        enhancer
-    );
-    let persistor = persistStore(store);
+const rootReducer = combineReducers(reducers);
 
-    return { persistor, store }
-};
+const configureStore = preloadedState => createStore(
+    rootReducer,
+    preloadedState,
+    enhancer
+);
 
 export default configureStore;
 

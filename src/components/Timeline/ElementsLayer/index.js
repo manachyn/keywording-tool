@@ -26,7 +26,8 @@ function ElementsLayer(LayerElementComponent) {
             onPlayElement: func,
             onStopElement: func,
             onEditElement: func,
-            playingElementId: string
+            playingElementId: string,
+            slicingElementId: string,
         };
 
         constructor(props) {
@@ -37,7 +38,7 @@ function ElementsLayer(LayerElementComponent) {
         }
 
         shouldComponentUpdate(nextProps, nextState) {
-            return !shallowEqual(this.props, nextProps);
+            return this.props.slicingElementId || !shallowEqual(this.props, nextProps);
         }
 
         validateResize(id, x, width, factor) {

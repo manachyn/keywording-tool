@@ -126,7 +126,8 @@ export default class Timeline extends Component {
             onEditSlice,
             canSetInPoint,
             canSetOutPoint,
-            playingSliceId
+            playingSliceId,
+            slicingSliceId
         } = this.props;
 
         const videoUrl = this.props.video.thumb.url || this.props.video.url;
@@ -146,6 +147,7 @@ export default class Timeline extends Component {
                              onStopElement={onStopSlice}
                              onEditElement={onEditSlice}
                              playingElementId={playingSliceId}
+                             slicingElementId={slicingSliceId}
                 />
                 <Indicator duration={duration}
                            currentTime={currentTime}
