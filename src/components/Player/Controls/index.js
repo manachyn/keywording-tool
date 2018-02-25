@@ -7,7 +7,7 @@ import './styles.css';
 
 import { percentageShape } from '../../propTypes';
 import { formatTime } from '../../../utils/time';
-import { throttle } from 'core-decorators';
+//import { throttle } from 'core-decorators';
 //import ThrottleAll from 'lodash-decorators/throttleAll';
 
 const { bool, number, func, string } = PropTypes;

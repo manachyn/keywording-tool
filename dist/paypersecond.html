@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pay per second</title>
+    <link href="payPerSecond.css" rel="stylesheet">
+    <link rel="stylesheet" href="dist/payPerSecond.css">
+</head>
+<body>
+    <div>Price: <span id="price">0</span></div>
+    <div id="player"></div>
+    <br>
+    <br>
+    <br>
+    <div id="timeline"></div>
+
+    <script src="payPerSecond.bundle.js"></script>
+    <script>
+        const pricePerSecond = 10;
+        const priceElement = document.getElementById('price');
+        document.addEventListener('DOMContentLoaded', function() {
+            function calculatePrice(slices) {
+                let totalDuration = 0;
+                slices.forEach(function(slice) {
+                    totalDuration += slice.duration;
+                });
+                priceElement.innerHTML = Math.round(pricePerSecond * totalDuration * 100) / 100;
+            }
+            payPerSecond.init({
+                video: {id: 1, url: 'TFR-AZALIA-3-2.mp4', type: 'video/mp4', thumb: {url: 'TFR-AZALIA-3-2.mp4', type: 'video/mp4'}, /*startTimecode: '02:30:05'*/},
+                slices: [
+                    {id: "792fe7bb-917e-462e-961d-bcd6da4e8b9e", offset: 2.6712, duration: 3.020853, videoId: 1, status: "new"},
+                    {id: "471eb386-02a9-496e-83b0-5780a7c1f4a7", offset: 6.65347, duration: 2.268540999999999, videoId: 1, status: "new"}
+                ],
+                onStateChange: calculatePrice
+            });
+            // payPerSecond.init({ video: {
+            //     id: 1,
+            //     url: 'https://producerslibrary.s3.amazonaws.com/video/preview/CRV-0067_020.mov?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJJZ5JU2UITQKU5AA%2F20180207%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180207T193142Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Signature=95c1769d462633d5b904dd5e90cb975cd003fa4364ae6ce39ea685e71a34f57d',
+            //     type: 'video/mp4',
+            //     thumb: {
+            //         url: 'https://producerslibrary.s3.amazonaws.com/video/preview/CRV-0067_020.mov?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJJZ5JU2UITQKU5AA%2F20180207%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180207T193142Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Signature=95c1769d462633d5b904dd5e90cb975cd003fa4364ae6ce39ea685e71a34f57d',
+            //         type: 'video/mp4'
+            //     },
+            //     startTimecode: '02:30:05'
+            // }, onStateChange: calculatePrice });
+            payPerSecond.renderPlayer('player', {player: {width: 960}});
+            payPerSecond.renderTimeline('timeline');
+        });
+    </script>
+</body>
+</html>
