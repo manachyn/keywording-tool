@@ -6,4 +6,10 @@
   --brand-light: #FFF;
   --brand-dark: #2B333F;
   --brand-gray: #F9F9F9;
+
+  --player-play-color: var(--brand-dark);
+  --player-fullscreen-color: var(--brand-primary);
+  --player-download-color: var(--brand-primary);
+
+  --timeline-item-background: color(var(--brand-primary) a(30%));
 }

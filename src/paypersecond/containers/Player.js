@@ -105,6 +105,7 @@ class Player extends Component {
                 height,
                 ...player,
             },
+            selectedVideo
         } = this.props;
 
         const size = { width, height };
@@ -113,6 +114,7 @@ class Player extends Component {
             api: this.api,
             width,
             video,
+            downloadUrl: selectedVideo.url
         };
 
         const videoEl = this.renderVideo(size);

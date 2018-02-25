@@ -32,20 +32,39 @@
   padding: 0;
   height: 100%;
   width: 4em;
+  cursor: pointer;
 }
 
 .controlButton {
   background: none;
   border: none;
   display: inline-block;
+  vertical-align: baseline;
+}
+
+.controlLink {
+  vertical-align: middle;
+  padding: 11px 0;
 }
 
 .playControl {
   composes: controlButton control;
-  cursor: pointer;
+  color: var(--player-play-color);
 }
 
+.fullscreenControl {
+  composes: controlButton control;
+  color: var(--player-fullscreen-color);
+}
 
+.downloadControl {
+  composes: controlLink control;
+  color: var(--player-download-color);
+}
+
+.downloadControl:hover {
+  color: var(--player-download-color);
+}
 
 .timeControl {
   flex: none;

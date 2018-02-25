@@ -26,7 +26,7 @@ export class Player extends Component {
     };
 
     render() {
-        const { width, children, video, api } = this.props;
+        const { width, children, video, api, downloadUrl } = this.props;
 
         return (
             <div styleName="player" style={{ width }}>
@@ -38,7 +38,8 @@ export class Player extends Component {
                           onTogglePlay={this.handleTogglePlay}
                           onToggleMute={api.toggleMute}
                           onToggleLoop={api.toggleLoop}
-                          onToggleFullScreen={api.toggleFullScreen} />
+                          onToggleFullScreen={api.toggleFullScreen}
+                          downloadUrl={downloadUrl} />
             </div>
         );
     }
@@ -52,6 +53,7 @@ Player.propTypes = {
     actions: playerActionsShape,
     api: videoAPIShape.isRequired,
     video: PropTypes.shape(videoProps).isRequired,
+    downloadUrl: PropTypes.string
 };
 
 Player.defaultProps = {
