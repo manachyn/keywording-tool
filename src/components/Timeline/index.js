@@ -48,14 +48,20 @@ export default class Timeline extends Component {
         //this.video.addEventListener('loadedmetadata', this.handleLoadedMetadata);
         this.video.addEventListener('loadeddata', this.handleLoadedData);
         this.video.addEventListener('seeked', this.handleSeeked);
+        //this.video.addEventListener('progress', this.handleProgress);
+        //this.video.addEventListener('canplay', this.handleCanplay);
+        //this.video.addEventListener('canplaythrough', this.handleCanplaythrough);
     }
 
     componentWillUnmount() {
         //this.video.removeEventListener('loadedmetadata', this.handleLoadedMetadata);
         this.video.removeEventListener('loadeddata', this.handleLoadedData);
         this.video.removeEventListener('seeked', this.handleSeeked);
+        //this.video.removeEventListener('progress', this.handleProgress);
+        //this.video.removeEventListener('canplay', this.handleCanplay);
+        //this.video.removeEventListener('canplaythrough', this.handleCanplaythrough);
     }
-
+    
     handleLoadedMetadata = (e) => {
         const width = this.timeline.offsetWidth;
         this.frameWidth = this.props.frameWidth;
@@ -85,6 +91,10 @@ export default class Timeline extends Component {
     }
 
     handleSeeked = () => {
+        if (this.video.readyState != 4) {
+            this.video.currentTime = this.currentFrame * this.frameDuration;
+            return
+        }
         const ctx = this.canvas.getContext('2d');
         const frameX = this.currentFrame * this.frameWidth;
         ctx.drawImage(this.video, 0, 0, this.video.videoWidth, this.video.videoHeight, frameX, 0, this.frameWidth, this.frameHeight);
