@@ -82,6 +82,11 @@ export default combineReducers({
 });
 
 export const getProcessedSlices = (state, videoId) =>
-    state.processing.processedSlicesIds.map(id => state.slices.byId[id]).filter(slice =>
+    state.processing.processedSlicesIds.map(id => {
+        const slice = state.slices.byId[id];
+        const videoInfo = state.info.byVideoId[videoId] ? state.info.byVideoId[videoId] : {};
+        const sliceInfo = state.info.bySliceId[id] ? state.info.bySliceId[id] : {};
+        return {...slice, info: {...videoInfo, ...sliceInfo}}
+    }).filter(slice =>
         slice.videoId === videoId
     );

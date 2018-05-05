@@ -9,10 +9,10 @@ import { renderField } from '../Form/FieldFormControl';
 import 'bootstrap/dist/css/bootstrap.css';
 
 let VideoMetadataEditForm = props => {
-    const { videoId, onSubmit, handleSubmit, submitting } = props;
+    const { elementId, onSubmit, handleSubmit, submitting } = props;
 
     const submit = values => {
-        return onSubmit(videoId, values);
+        return onSubmit(elementId, values);
     };
 
     return (
@@ -35,7 +35,8 @@ let VideoMetadataEditForm = props => {
 };
 
 VideoMetadataEditForm = reduxForm({
-    form: 'videoMetadataEditForm'
+    form: 'videoMetadataEditForm',
+    enableReinitialize: true
 })(VideoMetadataEditForm);
 
 export default VideoMetadataEditForm;

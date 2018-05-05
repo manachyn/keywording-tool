@@ -29,7 +29,7 @@ const bySliceId = (state = initialState.bySliceId, action) => {
 
             return {
                 ...state,
-                [id]: slice(undefined, action)
+                [id]: slice(state[id], action)
             };
         }
         default:
@@ -50,6 +50,8 @@ const editingSliceId = (state = initialState.editingSliceId, action) => {
     switch (action.type) {
         case SLICE_EDIT_DATA:
             return action.payload.id;
+        case VIDEO_SELECT:
+            return null;
         default:
             return state;
     }
@@ -67,8 +69,11 @@ export default info;
 export const getEditingVideoId = (state) =>
     state.editingVideoId;
 
+export const getEditingSliceId = (state) =>
+    state.editingSliceId;
+
 export const getVideoData = (state, videoId) =>
     state.byVideoId[videoId];
 
 export const getSliceData = (state, sliceId) =>
-    state.bySliceId[sliceId];
+    state.bySliceId[sliceId] ? state.bySliceId[sliceId] : {};

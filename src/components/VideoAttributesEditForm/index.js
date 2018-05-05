@@ -38,7 +38,8 @@ let VideoAttributesEditForm = props => {
 };
 
 VideoAttributesEditForm = reduxForm({
-    form: 'videoAttributesEditForm'
+    form: 'videoAttributesEditForm',
+    enableReinitialize: true
 })(VideoAttributesEditForm);
 
 export default VideoAttributesEditForm;

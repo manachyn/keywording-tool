@@ -156,8 +156,8 @@ export default class Timeline extends Component {
             slicingSliceId
         } = this.props;
 
-        const videoUrl = this.props.video.thumb.url || this.props.video.url;
-        const videoType = this.props.video.thumb.type || this.props.video.type;
+        const videoUrl = this.props.video.thumb ? this.props.video.thumb.url : this.props.video.url;
+        const videoType = this.props.video.thumb ? this.props.video.thumb.type : this.props.video.type;
 
         return (
             <div ref={ref => (this.timeline = ref)} styleName="timeline">

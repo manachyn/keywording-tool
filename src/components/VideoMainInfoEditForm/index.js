@@ -9,6 +9,12 @@ import { renderField } from '../Form/FieldFormControl';
 import Microphone from '../Speech/Microphone';
 import 'bootstrap/dist/css/bootstrap.css';
 
+const addAndSplit = (value, previousValue) => {
+    let arr = previousValue.split(', ');
+    arr.push(value)
+    return arr.join(', ')
+}
+
 let VideoMainInfoEditForm = props => {
     const { elementId, onSubmit, handleSubmit, submitting, change } = props;
 
@@ -37,7 +43,7 @@ let VideoMainInfoEditForm = props => {
                 </Col>
                 <Col md={6}>
                     <Field name="description" component={renderField} componentClass="textarea" label="Description"
-                           feedback={ <Microphone onResult={setValue('description')} /> }
+                           feedback={ <Microphone onResult={setValue('description')} normalize={addAndSplit} /> }
                     />
                 </Col>
                 <Clearfix />
@@ -50,7 +56,8 @@ let VideoMainInfoEditForm = props => {
 };
 
 VideoMainInfoEditForm = reduxForm({
-    form: 'videoMainInfoEditForm'
+    form: 'videoMainInfoEditForm',
+    enableReinitialize: true
 })(VideoMainInfoEditForm);
 
 export default VideoMainInfoEditForm;

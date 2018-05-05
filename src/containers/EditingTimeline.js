@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { getSelectedVideo, getSelectedVideoId } from '../modules/uploads/reducers/videos';
 import { getAllSlices } from '../modules/slicing/reducers/slices';
 import { editSliceData } from '../modules/info/actions';
-import Timeline from '../components/Timeline';
+import Timeline from './Timeline';
 
 const mapStateToProps = (state) => {
     return {

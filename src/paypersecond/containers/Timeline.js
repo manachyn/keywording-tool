@@ -8,7 +8,7 @@ import { validateSliceStartOffset, validateSliceFinishOffset } from '../../modul
 import Timeline from '../../components/Timeline';
 
 // import '../../../node_modules/font-awesome/css/font-awesome.css'`
-import 'bootstrap/dist/css/bootstrap.css';
+//import 'bootstrap/dist/css/bootstrap.css';
 
 const videoId = 1;
 

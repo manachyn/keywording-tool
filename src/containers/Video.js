@@ -5,14 +5,14 @@ import { connect } from 'react-redux';
 import { loadedMetadata, timeUpdate } from '../modules/video/actions';
 import VideoComponent from '../components/Video';
 import videoShape from '../components/Uploader/Video/shape';
-const { number, func, bool } = PropTypes;
+const { number, func, bool, object } = PropTypes;
 
 import { getSelectedVideo, getPlayFrom, getPlayTo, isPlaying } from '../modules/uploads/reducers/videos';
 import { stop } from '../modules/slicing/actions';
 
 class Video extends Component {
     static propTypes = {
-        video: videoShape.isRequired,
+        video: object.isRequired,
         currentTime: number.isRequired,
         playing: bool.isRequired,
         onTimeUpdate: func,

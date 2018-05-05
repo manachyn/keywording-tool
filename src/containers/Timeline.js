@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { getSelectedVideo, getSelectedVideoId } from '../modules/uploads/reducers/videos';
 import { setInPoint, setOutPoint, remove, resize, play, stop } from '../modules/slicing/actions';
+import { seek } from '../modules/video/actions';
 import { getAllSlices } from '../modules/slicing/reducers/slices';
 import { validateSliceStartOffset, validateSliceFinishOffset } from '../modules/slicing/validation/validators';
 import Timeline from '../components/Timeline';
@@ -40,6 +41,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         onSetOutPoint: (currentTime) => {
             dispatch(setOutPoint(currentTime))
+        },
+        onSetCurrentTime: (currentTime, duration) => {
+            dispatch(seek(currentTime))
         },
     }
 };

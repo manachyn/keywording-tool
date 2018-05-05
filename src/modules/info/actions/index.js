@@ -39,3 +39,10 @@ export const submitVideoData = (id, data, dispatch) => {
         resolve();
     });
 };
+
+export const submitSliceData = (id, data, dispatch) => {
+    return new Promise((resolve) => {
+        dispatch(saveSliceData(id, data));
+        resolve();
+    });
+};

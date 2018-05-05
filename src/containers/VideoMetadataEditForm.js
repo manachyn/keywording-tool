@@ -9,8 +9,8 @@ const mapStateToProps = (state) => {
     const videoId = getEditingVideoId(state.info);
 
     return {
-        videoId,
-        //initialValues: getVideoData(state.info, videoId)
+        elementId: videoId,
+        initialValues: getVideoData(state.info, videoId)
     }
 };
 
