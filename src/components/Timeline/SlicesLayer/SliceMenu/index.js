@@ -12,7 +12,8 @@ export default class SliceMenu extends Component {
         onRemove: func,
         onEdit: func,
         onPlay: func,
-        onStop: func
+        onStop: func,
+        onPause: func,
     };
 
     handleRemove = () => {
@@ -31,8 +32,12 @@ export default class SliceMenu extends Component {
         if (this.props.onStop) this.props.onStop(this.props.id);
     };
 
+    handlePause = () => {
+        if (this.props.onPause) this.props.onPause(this.props.id);
+    };
+
     render() {
-        const { onRemove, onEdit, onPlay, onStop } = this.props;
+        const { onRemove, onEdit, onPlay, onStop, onPause } = this.props;
 
         if (!onRemove && !onEdit) {
             return null;
@@ -45,8 +50,8 @@ export default class SliceMenu extends Component {
                     {onEdit && <br/>}
                     {onPlay && <Glyphicon title="Play this slice" styleName="menuItem" glyph="play" onClick={this.handlePlay} />}
                     {onPlay && <br/>}
-                    {onStop && <Glyphicon styleName="menuItem" glyph="stop" onClick={this.handleStop} />}
-                    {onStop && <br/>}
+                    {onPause && <Glyphicon styleName="menuItem" glyph="pause" onClick={this.handlePause} />}
+                    {onPause && <br/>}
                 </div>
                 <div styleName="bottom">
                     {onRemove && <br/> && <Glyphicon title="Delete this slice" styleName="menuItem" glyph="trash" onClick={this.handleRemove} />}

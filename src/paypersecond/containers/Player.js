@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { loadedMetadata, timeUpdate, seek, seeked } from '../../modules/video/actions';
+import { loadedMetadata, timeUpdate, seek, seeked, togglePlay } from '../../modules/video/actions';
 import VideoComponent from '../../components/Video';
 import PlayerComponent from '../../components/Player';
 const { number, func, bool, string, object } = PropTypes;
@@ -23,6 +23,7 @@ class Player extends Component {
         playFrom: number,
         playTo: number,
         onSeeked: func,
+        onTogglePlay: func,
     };
 
     static defaultProps = {
@@ -58,9 +59,17 @@ class Player extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.playing !== this.props.playing && this.props.playing) {
-            this.api.seek(this.props.playFrom);
-            this.api.play();
+        if (prevProps.playFrom !== this.props.playFrom) {
+            if (this.props.playFrom !== null) {
+                this.api.seek(this.props.playFrom);
+            }
+        }
+        if (prevProps.playing !== this.props.playing) {
+            if (this.props.playing) {
+                this.api.play();
+            } else {
+                this.api.pause();
+            }
         }
         if (prevProps.video.seekTo !== this.props.video.seekTo && this.props.video.seekTo) {
             this.api.seek(this.props.video.seekTo);
@@ -105,7 +114,9 @@ class Player extends Component {
                 height,
                 ...player,
             },
-            selectedVideo
+            selectedVideo,
+            playing,
+            onTogglePlay,
         } = this.props;
 
         const size = { width, height };
@@ -114,7 +125,9 @@ class Player extends Component {
             api: this.api,
             width,
             video,
-            downloadUrl: selectedVideo.url
+            downloadUrl: selectedVideo.url,
+            playing,
+            onTogglePlay,
         };
 
         const videoEl = this.renderVideo(size);
@@ -155,7 +168,10 @@ const mapDispatchToProps = (dispatch) => {
         },
         onSeeked: () => {
             dispatch(seeked())
-        }
+        },
+        onTogglePlay: () => {
+            dispatch(togglePlay())
+        },
     }
 };
 

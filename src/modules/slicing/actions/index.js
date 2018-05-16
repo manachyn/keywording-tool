@@ -4,6 +4,7 @@ import {
     SLICE_RESIZE,
     SLICE_PLAY,
     SLICE_STOP,
+    SLICE_PAUSE,
     SLICE_SET_FINISH_TIME,
     SLICING_START,
     SLICING_FINISH
@@ -47,6 +48,12 @@ export function play(id) {
 export function stop() {
     return {
         type: SLICE_STOP,
+    };
+}
+
+export function pause() {
+    return {
+        type: SLICE_PAUSE,
     };
 }
 

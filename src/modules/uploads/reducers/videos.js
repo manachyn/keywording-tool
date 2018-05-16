@@ -95,4 +95,4 @@ export const getPlayFrom = ({ slices }) =>
 export const getPlayTo = ({ slices }) =>
     slices.playingId !== null ? slices.byId[slices.playingId].offset + slices.byId[slices.playingId].duration : null;
 
-export const isPlaying = ({ slices, video }) => slices.playingId !== null;
+export const isPlaying = ({ video }) => !video.paused;

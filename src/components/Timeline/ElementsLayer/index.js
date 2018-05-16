@@ -9,7 +9,7 @@ import './styles.css';
 import elementShape from '../Element/shape';
 import { shallowEqual } from '../../../utils/compare';
 
-const { arrayOf, number, func, string } = PropTypes;
+const { arrayOf, number, func, string, bool } = PropTypes;
 
 function ElementsLayer(LayerElementComponent) {
     class Layer extends Component {
@@ -25,8 +25,10 @@ function ElementsLayer(LayerElementComponent) {
             onRemoveElement: func,
             onPlayElement: func,
             onStopElement: func,
+            onPauseElement: func,
             onEditElement: func,
             playingElementId: string,
+            playing: bool,
             slicingElementId: string,
         };
 
@@ -95,7 +97,7 @@ function ElementsLayer(LayerElementComponent) {
         }
 
         renderElement(element) {
-            const { containerWidth, elementX, elementWidth, onRemoveElement, onPlayElement, onStopElement, onEditElement, playingElementId } = this.props;
+            const { containerWidth, elementX, elementWidth, onRemoveElement, onPlayElement, onStopElement, onPauseElement, onEditElement, playingElementId, playing } = this.props;
             const { id } = element;
 
             // const x = containerWidth * element.offset / duration;
@@ -109,14 +111,18 @@ function ElementsLayer(LayerElementComponent) {
 
             return (
                 <ResizableLayerItem key={element.id} { ...itemProps } onResize={this.resizeElement} validateResize={this.validateResize}>
-                    <LayerElementComponent { ...element } onRemove={onRemoveElement} onPlay={playingElementId === null || playingElementId !== element.id ? onPlayElement : null} onStop={playingElementId !== null && playingElementId === element.id ? onStopElement : null} onEdit={onEditElement} />
+                    <LayerElementComponent { ...element } 
+                    onRemove={onRemoveElement}
+                    onPlay={!playing || playingElementId !== element.id ? onPlayElement : null}
+                    onStop={playing !== null && playingElementId === element.id ? onStopElement : null}
+                    onPause={playing && playingElementId === element.id ? onPauseElement : null}
+                    onEdit={onEditElement} />
                 </ResizableLayerItem>
             );
         }
 
         render() {
             const {elements} = this.props;
-            console.log('Slices')
 
             return <div styleName="elements">{elements.map(this.renderElement)}</div>;
         }

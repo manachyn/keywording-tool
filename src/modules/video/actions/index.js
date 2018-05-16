@@ -3,6 +3,7 @@ import {
     VIDEO_TIME_UPDATE,
     VIDEO_PLAY,
     VIDEO_PAUSE,
+    VIDEO_TOGGLE_PLAY,
     VIDEO_SEEK,
     VIDEO_SEEKED
 } from '../constants/actionTypes';
@@ -29,7 +30,13 @@ export function play() {
 
 export function pause() {
     return {
-        type: VIDEO_PLAY
+        type: VIDEO_PAUSE
+    };
+}
+
+export function togglePlay() {
+    return {
+        type: VIDEO_TOGGLE_PLAY
     };
 }
 

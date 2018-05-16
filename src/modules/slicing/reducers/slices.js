@@ -9,7 +9,8 @@ import {
     SLICE_PLAY,
     SLICE_STOP,
     SLICING_START,
-    SLICING_FINISH
+    SLICING_FINISH,
+    SLICE_PAUSE
 } from '../constants/actionTypes';
 
 import {
@@ -96,32 +97,47 @@ const slicingId = (state = initialState.slicingId, action) => {
     }
 };
 
-const playing = (state = initialState.playing, action) => {
-    switch (action.type) {
-        case SLICE_PLAY: {
-            const { slice } = action.payload;
-            return {id: slice.id, from: slice.offset, to: slice.offset + slice.duration};
-        }
-        case SLICE_STOP:
-            return initialState.playing;
-        case SLICE_REMOVE:
-            return action.payload.id === state.id ? initialState.playing : state;
-        case VIDEO_TIME_UPDATE: {
-            const { currentTime } = action.payload;
-            if (state.id !== null) {
-                if (currentTime >= state.from && currentTime < state.to) {
-                    return state;
-                } else {
-                    return initialState.playing;
-                }
-            }
+// const playing = (state = initialState.playing, action) => {
+//     switch (action.type) {
+//         case SLICE_PLAY: {
+//             const { slice } = action.payload;
+//             return {id: slice.id, from: slice.offset, to: slice.offset + slice.duration};
+//         }
+//         case SLICE_STOP:
+//             return initialState.playing;
+//         case SLICE_PAUSE:
+//             return initialState.playing;
+//         case SLICE_REMOVE:
+//             return action.payload.id === state.id ? initialState.playing : state;
+//         case VIDEO_TIME_UPDATE: {
+//             const { currentTime } = action.payload;
+//             if (state.id !== null) {
+//                 if (currentTime >= state.from && currentTime < state.to) {
+//                     return state;
+//                 } else {
+//                     return initialState.playing;
+//                 }
+//             }
 
-            return initialState.playing;
-        }
-        default:
-            return state
-    }
-};
+//             return initialState.playing;
+//         }
+//         default:
+//             return state
+//     }
+// };
+
+// const playing = (state = false, action) => {
+//     switch (action.type) {
+//         case SLICE_PLAY:
+//             return true;
+//         case SLICE_STOP:
+//             return false;
+//         case SLICE_PAUSE:
+//             return false;
+//         default:
+//             return state
+//     }
+// };
 
 const playingId = (state = initialState.playingId, action) => {
     switch (action.type) {
@@ -140,7 +156,7 @@ const slices = combineReducers({
     byId,
     allIds,
     slicingId,
-    playingId
+    playingId,
 });
 
 export default slices;
@@ -160,3 +176,5 @@ export const hasSlices = (state, videoId) =>
 
 export const getPlayingSlice = (state) =>
     state.slices.playingId !== null ? state.slices.byId[state.slices.playingId] : null;
+
+export const isPlaying = ({ slices, video }) => slices.playingId !== null && !video.paused;

@@ -13,15 +13,16 @@ export default class Slice extends Component {
         onRemove: func,
         onPlay: func,
         onStop: func,
+        onPause: func,
         onEdit: func
     };
 
     render() {
-        const { id, onRemove, onPlay, onStop, onEdit } = this.props;
+        const { id, onRemove, onPlay, onStop, onPause, onEdit } = this.props;
 
         return (
             <div styleName="slice">
-                <SliceMenu id={id} onRemove={onRemove} onEdit={onEdit} onPlay={onPlay} onStop={onStop} />
+                <SliceMenu id={id} onRemove={onRemove} onEdit={onEdit} onPlay={onPlay} onStop={onStop} onPause={onPause} />
             </div>
         );
     }

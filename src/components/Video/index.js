@@ -76,7 +76,7 @@ export default class Video extends Component {
     handleTimeUpdate = () => {
         if (this.props.playFrom !== null && this.props.playTo !== null) {
             if (this.video.currentTime > this.props.playTo) {
-                this.seek(this.props.playFrom);
+                this.seek(this.props.playTo);
                 this.pause();
                 if (this.props.onStopSlice) this.props.onStopSlice();
             }

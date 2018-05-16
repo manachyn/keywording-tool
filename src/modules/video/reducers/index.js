@@ -1,5 +1,6 @@
-import { VIDEO_LOADED_METADATA, VIDEO_TIME_UPDATE, VIDEO_SEEK, VIDEO_SEEKED } from '../constants/actionTypes';
+import { VIDEO_LOADED_METADATA, VIDEO_TIME_UPDATE, VIDEO_SEEK, VIDEO_SEEKED, VIDEO_TOGGLE_PLAY } from '../constants/actionTypes';
 import { VIDEO_SELECT } from '../../uploads/constants/actionTypes';
+import { SLICE_PLAY, SLICE_PAUSE, SLICE_STOP } from '../../slicing/constants/actionTypes';
 
 import initialState from '../initialState';
 
@@ -46,6 +47,27 @@ export default function video(state = initialState, action) {
                 seekTo: null
             };
         }
+        case VIDEO_TOGGLE_PLAY: {
+            return {
+                ...state,
+                paused: !state.paused
+            };
+        }
+        case SLICE_PLAY:
+            return {
+                ...state,
+                paused: false
+            };
+        case SLICE_STOP:
+            return {
+                ...state,
+                paused: true
+            };
+        case SLICE_PAUSE:
+            return {
+                ...state,
+                paused: true
+            };
         default:
             return state;
     }

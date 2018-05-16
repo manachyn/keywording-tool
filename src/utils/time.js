@@ -64,7 +64,7 @@ export function timeToSeconds(timeString) {
     timeArray.reverse();
     const hours = timeArray[2] ? parseInt(timeArray[2]) * 60 * 60 : 0;
     const minutes = timeArray[1] ? parseInt(timeArray[1]) * 60 : 0;
-    const seconds = timeArray[0] ? parseInt(timeArray[0]) : 0;
+    const seconds = timeArray[0] ? parseFloat(timeArray[0]) : 0;
 
     return hours + minutes + seconds;
 }

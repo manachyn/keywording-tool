@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 import { getSelectedVideo, getSelectedVideoId } from '../../modules/uploads/reducers/videos';
+import { isPlaying } from '../../modules/slicing/reducers/slices';
 import { getSlicesOfSelectedVideo } from '../../selectors';
-import { setInPoint, setOutPoint, remove, resize, play, stop } from '../../modules/slicing/actions';
+import { setInPoint, setOutPoint, remove, resize, play, stop, pause } from '../../modules/slicing/actions';
 import { seek } from '../../modules/video/actions';
 import { getAllSlices } from '../../modules/slicing/reducers/slices';
 import { validateSliceStartOffset, validateSliceFinishOffset } from '../../modules/slicing/validation/validators';
@@ -25,6 +26,7 @@ const mapStateToProps = (state) => {
         slices: getSlicesOfSelectedVideo(state),
         slicingSliceId: state.slices.slicingId,
         playingSliceId: state.slices.playingId,
+        playing: isPlaying(state),
         canSetInPoint: state.slices.slicingId === null && validateSliceStartOffset(selectedVideoId, state.video.currentTime, state.slices),
         canSetOutPoint: state.slices.slicingId !== null && validateSliceFinishOffset(state.video.currentTime, state.slices.slicingId, state.slices)
     }
@@ -43,6 +45,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         onStopSlice: (id) => {
             dispatch(stop(id))
+        },
+        onPauseSlice: (id) => {
+            dispatch(pause(id))
         },
         onSetInPoint: (currentTime) => {
             dispatch(setInPoint(currentTime))

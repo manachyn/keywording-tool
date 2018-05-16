@@ -24,10 +24,12 @@ export default class Timeline extends Component {
         slices: arrayOf(sliceShape),
         slicingSliceId: string,
         playingSliceId: string,
+        playing: bool,
         onResizeSlice: func,
         onRemoveSlice: func,
         onPlaySlice: func,
         onStopSlice: func,
+        onPauseSlice: func,
         onEditSlice: func,
         onSetInPoint: func,
         onSetOutPoint: func,
@@ -41,7 +43,8 @@ export default class Timeline extends Component {
         currentTime: 0,
         currentPercentage: 0,
         canSetInPoint: true,
-        canSetOutPoint: true
+        canSetOutPoint: true,
+        playing: false,
     };
 
     componentDidMount() {
@@ -149,10 +152,12 @@ export default class Timeline extends Component {
             onRemoveSlice,
             onPlaySlice,
             onStopSlice,
+            onPauseSlice,
             onEditSlice,
             canSetInPoint,
             canSetOutPoint,
             playingSliceId,
+            playing,
             slicingSliceId
         } = this.props;
 
@@ -171,8 +176,10 @@ export default class Timeline extends Component {
                              onRemoveElement={onRemoveSlice}
                              onPlayElement={onPlaySlice}
                              onStopElement={onStopSlice}
+                             onPauseElement={onPauseSlice}
                              onEditElement={onEditSlice}
                              playingElementId={playingSliceId}
+                             playing={playing}
                              slicingElementId={slicingSliceId}
                 />
                 <Indicator duration={duration}

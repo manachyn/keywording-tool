@@ -3,6 +3,7 @@ export const SLICE_REMOVE = 'SLICE_REMOVE';
 export const SLICE_RESIZE = 'SLICE_RESIZE';
 export const SLICE_PLAY = 'SLICE_PLAY';
 export const SLICE_STOP = 'SLICE_STOP';
+export const SLICE_PAUSE = 'SLICE_PAUSE';
 export const SLICE_SET_FINISH_TIME = 'SLICE_SET_FINISH_TIME';
 export const SLICING_START = 'SLICING_START';
 export const SLICING_FINISH = 'SLICING_FINISH';
