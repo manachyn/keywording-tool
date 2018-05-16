@@ -20,6 +20,7 @@ export class Player extends Component {
     handleKeyDown = (event) => {
         // Spacebar
         if (event.keyCode === 32) {
+            event.preventDefault();
             this.handleTogglePlay();
         }
     };
