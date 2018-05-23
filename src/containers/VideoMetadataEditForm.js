@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-
+import { Field, reduxForm } from 'redux-form';
 import VideoMetadataEditForm from '../components/VideoMetadataEditForm';
 import { getEditingVideoId, getVideoData } from '../modules/info/reducers/info';
 import { submitVideoData } from '../modules/info/actions';
@@ -25,7 +25,12 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
+const form = reduxForm({
+    form: 'videoMetadataEditForm',
+    enableReinitialize: true
+})(VideoMetadataEditForm);
+
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(VideoMetadataEditForm);
+)(form);

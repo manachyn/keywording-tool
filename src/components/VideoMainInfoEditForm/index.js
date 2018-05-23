@@ -35,6 +35,7 @@ let VideoMainInfoEditForm = props => {
 
     return (
         <Row>
+            {Math.round(new Date().getTime()/1000)}
             <Form onSubmit={handleSubmit(submit)}>
                 <Col md={6}>
                     <Field type="text" name="code" component={renderField} label="Code" />
@@ -55,9 +56,6 @@ let VideoMainInfoEditForm = props => {
     )
 };
 
-VideoMainInfoEditForm = reduxForm({
-    form: 'videoMainInfoEditForm',
-    enableReinitialize: true
-})(VideoMainInfoEditForm);
+
 
 export default VideoMainInfoEditForm;

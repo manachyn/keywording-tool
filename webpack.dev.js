@@ -6,6 +6,6 @@ module.exports = merge(common, {
     devServer: {
         //contentBase: './dist'
         contentBase: './',
-        host: '0.0.0.0',
+        //host: '0.0.0.0',
     }
 });

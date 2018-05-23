@@ -34,9 +34,4 @@ let VideoMetadataEditForm = props => {
     )
 };
 
-VideoMetadataEditForm = reduxForm({
-    form: 'videoMetadataEditForm',
-    enableReinitialize: true
-})(VideoMetadataEditForm);
-
 export default VideoMetadataEditForm;
