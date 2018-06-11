@@ -1,17 +1,20 @@
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 
 import VideoMainInfoEditForm from '../components/VideoMainInfoEditForm';
 import { getEditingVideoId, getVideoData } from '../modules/info/reducers/info';
 import { submitVideoData } from '../modules/info/actions';
 import { addSuccessMessage } from '../modules/flashMessages/actions';
 
+const selector = formValueSelector('videoMainInfoEditForm'); 
+
 const mapStateToProps = (state) => {
     const videoId = getEditingVideoId(state.info);
-
+    const description = selector(state, 'description');
     return {
         elementId: videoId,
-        initialValues: getVideoData(state.info, videoId)
+        initialValues: getVideoData(state.info, videoId),
+        description
     }
 };
 

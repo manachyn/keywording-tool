@@ -32,7 +32,7 @@ const Navigation = ({ isInfoEnabled, isSlicingEnabled, isEditingEnabled, isProce
 
     return (
         <ul styleName="navigation">
-            <li><NavLink to="/" activeClassName={styles.active}>Video Upload</NavLink></li>
+            <li><NavLink to="/" exact activeClassName={styles.active}>Video Upload</NavLink></li>
             <li>{info}</li>
             <li>{slicing}</li>
             <li>{editing}</li>

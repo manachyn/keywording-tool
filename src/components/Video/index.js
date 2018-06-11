@@ -38,6 +38,7 @@ export default class Video extends Component {
         autoPlay: false,
         controls: false,
         //currentTime: 0
+        width: '100%'
     };
 
     constructor(props) {

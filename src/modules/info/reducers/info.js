@@ -75,5 +75,9 @@ export const getEditingSliceId = (state) =>
 export const getVideoData = (state, videoId) =>
     state.byVideoId[videoId];
 
-export const getSliceData = (state, sliceId) =>
-    state.bySliceId[sliceId] ? state.bySliceId[sliceId] : {};
+export const getSliceData = (state, sliceId, videoId) => {
+    const videoInfo = state.byVideoId[videoId] ? state.byVideoId[videoId] : {};
+    const sliceInfo = state.bySliceId[sliceId] ? state.bySliceId[sliceId] : {};
+
+    return {...videoInfo, ...sliceInfo}
+}

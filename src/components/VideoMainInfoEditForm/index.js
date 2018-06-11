@@ -10,9 +10,13 @@ import Microphone from '../Speech/Microphone';
 import 'bootstrap/dist/css/bootstrap.css';
 
 const addAndSplit = (value, previousValue) => {
-    let arr = previousValue.split(', ');
+    if (previousValue) {
+        let arr = previousValue.split(', ');
     arr.push(value)
     return arr.join(', ')
+    } else {
+        return value;
+    }
 }
 
 let VideoMainInfoEditForm = props => {
@@ -30,12 +34,11 @@ let VideoMainInfoEditForm = props => {
     };
 
     const setValue = (field) => (value) => {
-        change(field, value);
+        change(field, addAndSplit(value, props[field]));
     };
 
     return (
         <Row>
-            {Math.round(new Date().getTime()/1000)}
             <Form onSubmit={handleSubmit(submit)}>
                 <Col md={6}>
                     <Field type="text" name="code" component={renderField} label="Code" />
@@ -44,7 +47,7 @@ let VideoMainInfoEditForm = props => {
                 </Col>
                 <Col md={6}>
                     <Field name="description" component={renderField} componentClass="textarea" label="Description"
-                           feedback={ <Microphone onResult={setValue('description')} normalize={addAndSplit} /> }
+                           feedback={ <Microphone onResult={setValue('description')} /> }
                     />
                 </Col>
                 <Clearfix />
